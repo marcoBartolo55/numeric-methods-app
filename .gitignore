@@ -1,0 +1,37 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+/target/
+
+# Gradle
+/build/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDEs
+.idea/
+*.iml
+
+# Misc
+*.swp
+*.swo
+
+# Python (if any)
+__pycache__/
+*.pyc
+
+# Other
+node_modules/
+build/

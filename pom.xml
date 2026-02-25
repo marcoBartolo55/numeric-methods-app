@@ -41,7 +41,8 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.numeric.methods.App</mainClass>
+                            <mainClass>com.numeric.methods/com.numeric.methods.App</mainClass>
+                            <modulePath>true</modulePath>
                         </configuration>
                     </execution>
                 </executions>
