@@ -15,4 +15,10 @@ public class firstMenuController {
     private void switchToBisection() throws IOException {
         App.setRoot("bisection");
     }
+    
+    @FXML
+    private void switchToMuller() throws IOException {
+        App.setRoot("muller");
+    }
+
 }

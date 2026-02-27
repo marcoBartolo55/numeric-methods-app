@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 
 public class bisectionController {
 
+    // Campos FXML de tipo TextField
     @FXML
     private TextField functionField;
     @FXML
@@ -19,6 +20,7 @@ public class bisectionController {
     @FXML
     private TextField upperLimitField;
 
+    // Campos FXML de tipo TableView y TableColumn
     @FXML
     private TableView<ResultRow> resultsTable;
     @FXML
@@ -33,7 +35,10 @@ public class bisectionController {
     private TableColumn<ResultRow, Integer> fxmColumn;
     @FXML
     private TableColumn<ResultRow, Integer> errorColumn;
+    @FXML
+    private TextField iterationsField;
 
+    // ObservableList para almacenar los resultados de la tabla
     private ObservableList<ResultRow> tableData = FXCollections.observableArrayList();
 
     @FXML
@@ -41,21 +46,33 @@ public class bisectionController {
         App.setRoot("firstMenu");
     }
 
+
     @FXML
     private void calculateBisection() {
         try {
-            int a = Integer.parseInt(lowerLimitField.getText());
-            int b = Integer.parseInt(upperLimitField.getText());
-            // int n = ... // puedes agregar un campo para n si lo necesitas
-            bisecction_method bisec = new bisecction_method();
-            int xm = bisec.bisection(a, b, 1);
-            int error = bisec.error_bisection(a, b);
-            // Ejemplo: agrega una fila a la tabla
+            // Recibido del valor de las variables de entrada
+            double a = Double.parseDouble(lowerLimitField.getText());
+            double b = Double.parseDouble(upperLimitField.getText());
+            int n = Integer.parseInt(iterationsField.getText());
+            String function = functionField.getText();
+
+            bisecction_method bisection = new bisecction_method();
+
+            // Validación
+            if (!bisection.validation(n)) {
+                throw new IllegalArgumentException("Algún mensaje de error");
+            }
+
+            // Calculo
+            double xm = bisection.bisection(a, b, n);
+            double error = bisection.error_bisection(a, b);
+
+            // Manejo de tabla: Ingresar filas
             tableData.clear();
-            tableData.add(new ResultRow(1, a, b, xm, 0, error));
+            // tableData.add(new ResultRow(1, a, b, xm, 0, error));
             resultsTable.setItems(tableData);
         } catch (NumberFormatException e) {
-            // Manejo de error: puedes mostrar un mensaje al usuario
+            System.out.println(e);
         }
     }
 

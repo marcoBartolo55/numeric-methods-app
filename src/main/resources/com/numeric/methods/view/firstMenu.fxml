@@ -10,6 +10,9 @@
         <Button fx:id="bisectionButton" text="Bisección" onAction="#switchToBisection" />
     </children>
     <children>
+        <Button fx:id="mullerButton" text="Muller" onAction="#switchToMuller" />
+    </children>
+    <children>
         <Button fx:id="backButton" text="Volver" onAction="#switchToMain" />
     </children>
     <padding>

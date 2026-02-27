@@ -20,6 +20,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("main"), 1000, 700);
         stage.setScene(scene);
         stage.setTitle("Proyecto Métodos Numéricos");
+        stage.setResizable(false);
         stage.show();
     }
 
