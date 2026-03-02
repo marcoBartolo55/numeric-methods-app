@@ -1,26 +1,26 @@
-/* Bisection Method - Modern Style */
+/* Deflation - Modern Style */
 .root {
-    -fx-background-color: #f3f7fa;
+    -fx-background-color: #fce4ec;
 }
 .label {
     -fx-font-size: 18px;
-    -fx-text-fill: #2d3a4a;
+    -fx-text-fill: #ad1457;
     -fx-font-weight: 600;
 }
 .button {
-    -fx-background-color: #43a047;
+    -fx-background-color: #d81b60;
     -fx-text-fill: #fff;
     -fx-font-size: 16px;
     -fx-background-radius: 10px;
     -fx-padding: 10 30 10 30;
-    -fx-effect: dropshadow(gaussian, #43a047, 4, 0.2, 0, 2);
+    -fx-effect: dropshadow(gaussian, #d81b60, 4, 0.2, 0, 2);
 }
 .button:hover {
-    -fx-background-color: #388e3c;
+    -fx-background-color: #ad1457;
 }
 .text-field {
     -fx-background-color: #fff;
-    -fx-border-color: #43a047;
+    -fx-border-color: #d81b60;
     -fx-border-radius: 8px;
     -fx-padding: 8 16 8 16;
     -fx-font-size: 16px;

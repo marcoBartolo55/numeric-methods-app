@@ -6,16 +6,13 @@
 <?import java.lang.String?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.mullerController">
-    <stylesheets>
-        <String fx:value="@../style/main.css"/>
-    </stylesheets>
     <children>
         <GridPane hgap="10" vgap="10" alignment="CENTER">
             <!-- Etiquetas y campos de texto -->
-             <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-            <Label text="Real" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Imaginario" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
             <Label text="P_0:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <TextField fx:id="lowerLimitField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -32,9 +29,9 @@
             <Label text="Grado de Error:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
             <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-            <Button fx:id="toImaginaryNumbers" text="Imaginarios" onAction="#switchToMullerIm" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER" />
+            <Button fx:id="toRealNumbers" text="Reales" onAction="#switchToMuller" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER" />
             <!-- Botón calcular -->
-            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateMuller" GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" alignment="CENTER" /> -->
+            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateMuller" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" /> -->
         </GridPane>
         <!-- Tabla dinámica fuera del GridPane -->
         <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">

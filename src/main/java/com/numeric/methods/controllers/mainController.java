@@ -8,6 +8,21 @@ public class mainController {
 
     @FXML
     private void switchToFirstMenu() throws IOException {
-        App.setRoot("firstMenu");
+        App.setRoot("first-menu");
+    }
+
+    @FXML
+    private void switchToSecondMenu() throws IOException {
+        App.setRoot("second-menu");
+    }
+
+    @FXML
+    private void switchToThirdMenu() throws IOException {
+        App.setRoot("third-menu");
+    }
+
+    @FXML
+    private void exitApplication() throws IOException {
+        System.exit(0);
     }
 }

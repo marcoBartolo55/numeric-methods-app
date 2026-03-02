@@ -7,7 +7,17 @@ import com.numeric.methods.App;
 public class mullerController {
 
     @FXML
-    private void switchToFirstMenu() throws IOException {
-        App.setRoot("firstMenu");
+    private void switchToMenu() throws IOException {
+        App.setRoot("first-menu");
+    }
+
+    @FXML
+    private void switchToMuller() throws IOException {
+        App.setRoot("muller");
+    }
+
+    @FXML
+    private void switchToMullerIm() throws IOException {
+        App.setRoot("mullerIm");
     }
 }

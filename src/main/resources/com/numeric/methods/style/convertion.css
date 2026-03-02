@@ -1,26 +1,26 @@
-/* Bisection Method - Modern Style */
+/* Numeric Conversion - Modern Style */
 .root {
-    -fx-background-color: #f3f7fa;
+    -fx-background-color: #f9fbe7;
 }
 .label {
     -fx-font-size: 18px;
-    -fx-text-fill: #2d3a4a;
+    -fx-text-fill: #6d4c41;
     -fx-font-weight: 600;
 }
 .button {
-    -fx-background-color: #43a047;
+    -fx-background-color: #ffb300;
     -fx-text-fill: #fff;
     -fx-font-size: 16px;
     -fx-background-radius: 10px;
     -fx-padding: 10 30 10 30;
-    -fx-effect: dropshadow(gaussian, #43a047, 4, 0.2, 0, 2);
+    -fx-effect: dropshadow(gaussian, #ffb300, 4, 0.2, 0, 2);
 }
 .button:hover {
-    -fx-background-color: #388e3c;
+    -fx-background-color: #ffa000;
 }
 .text-field {
     -fx-background-color: #fff;
-    -fx-border-color: #43a047;
+    -fx-border-color: #ffb300;
     -fx-border-radius: 8px;
     -fx-padding: 8 16 8 16;
     -fx-font-size: 16px;

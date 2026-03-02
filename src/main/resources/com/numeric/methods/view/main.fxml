@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 <?import java.lang.String?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.mainController" >
-   <stylesheets>
-      <String fx:value="@../style/main.css"/>
-   </stylesheets>
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.mainController">
+
    <children>
-      <Label text="Programa para Resolver Métodos Numéricos" fx:id="methodsTitle"/>
+      <Label text="Menú Principal - Opciones" />
+      <GridPane hgap="20" vgap="15" alignment="CENTER">
+         <Button fx:id="numericMethodsButton" text="Métodos numéricos 1" onAction="#switchToFirstMenu" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+         <Button fx:id="numericMethodsButton2" text="Métodos numéricos 2" onAction="#switchToSecondMenu" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+         <Button fx:id="numericMethodsButton3" text="Métodos numéricos 3" onAction="#switchToThirdMenu" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      </GridPane>
    </children>
-   <children>
-      <Label text="Solucionador Ecuaciones de una Sola Variable" />
-      <Button fx:id="numericMethodsButton" text="Iniciar" onAction="#switchToFirstMenu"/>
-   </children>
+      <Button fx:id="exitButton" text="Salir" onAction="#exitApplication"/>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>

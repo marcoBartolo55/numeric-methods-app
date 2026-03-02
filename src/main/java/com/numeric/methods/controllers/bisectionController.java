@@ -43,7 +43,7 @@ public class bisectionController {
 
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("firstMenu");
+        App.setRoot("first-menu");
     }
 
 
