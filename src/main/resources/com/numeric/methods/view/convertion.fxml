@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.convertionController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    
+    <children>
+        <GridPane hgap="10" vgap="10" alignment="CENTER">
+            <Label text="Número decimal:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="decimalField" promptText="Ej: 10.5" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Número de bits:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <ComboBox fx:id="bitsComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Seleccione bits">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="8" />
+                        <String fx:value="16" />
+                        <String fx:value="32" />
+                        <String fx:value="64" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <Label text="Signo (S/N):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="signField" promptText="Ej: S o N" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+                <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
+                
+                <Button fx:id="calculateButton" text="Calcular Binario" onAction="#calculateBinaryConversion" />
+            </HBox>
+        </GridPane>
+        
+        <Label text="Resultado de la conversión:" />
+        <TextArea fx:id="resultArea" prefHeight="200" prefWidth="400" editable="false" />
+    </children>
+</VBox>

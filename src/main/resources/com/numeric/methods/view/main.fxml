@@ -12,9 +12,9 @@
    <children>
       <Label text="Menú Principal - Opciones" />
       <GridPane hgap="20" vgap="15" alignment="CENTER">
-         <Button fx:id="numericMethodsButton" text="Métodos numéricos 1" onAction="#switchToFirstMenu" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-         <Button fx:id="numericMethodsButton2" text="Métodos numéricos 2" onAction="#switchToSecondMenu" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-         <Button fx:id="numericMethodsButton3" text="Métodos numéricos 3" onAction="#switchToThirdMenu" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+         <Button fx:id="numericMethodsButton" text="Primer parcial" onAction="#switchToFirstMenu" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+         <Button fx:id="numericMethodsButton2" text="Segundo parcial" onAction="#switchToSecondMenu" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+         <Button fx:id="numericMethodsButton3" text="Tercer parcial" onAction="#switchToThirdMenu" GridPane.columnIndex="0" GridPane.rowIndex="2" />
       </GridPane>
    </children>
       <Button fx:id="exitButton" text="Salir" onAction="#exitApplication"/>
