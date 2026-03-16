@@ -1,5 +1,5 @@
 package com.numeric.methods.logic;
 
-public class deflation {
+public class Deflation {
     
 }

@@ -1,6 +1,6 @@
 package com.numeric.methods.controllers;
 
-import com.numeric.methods.logic.convertion;
+import com.numeric.methods.logic.Convertion;
 
 import com.numeric.methods.App;
 import javafx.fxml.FXML;
@@ -49,7 +49,7 @@ public class convertionController {
             boolean isNegative = signText.equalsIgnoreCase("S");
             int bitsNumber = Integer.parseInt(bitsComboBox.getValue());
 
-            convertion convertion = new convertion(Integer.parseInt(decimalText), isNegative, bitsNumber);
+            Convertion convertion = new Convertion(Integer.parseInt(decimalText), isNegative, bitsNumber);
             resultArea.setText(convertion.decimalToBinary());
         } catch (NumberFormatException e) {
             showAlert("Alerta", "Entrada inválida", "Por favor, ingrese números válidos.", Alert.AlertType.ERROR);

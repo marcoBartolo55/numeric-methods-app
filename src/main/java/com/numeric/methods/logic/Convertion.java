@@ -1,12 +1,12 @@
 package com.numeric.methods.logic;
 
-public class convertion {
+public class Convertion {
     int decimalNumber;
     int bitsNumber;
     String binaryNumber;
     boolean isNegative;
 
-    public convertion(int decimalNumber, boolean isNegative, int bitsNumber) {
+    public Convertion(int decimalNumber, boolean isNegative, int bitsNumber) {
         this.decimalNumber = decimalNumber;
         this.isNegative = isNegative;
         this.bitsNumber = bitsNumber;
