@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import com.numeric.methods.App;
 
-public class firstMenuController {
+public class menuRootsEquationsController {
     // Menú principal
     @FXML
     private void switchToMain() throws IOException {
@@ -12,10 +12,7 @@ public class firstMenuController {
     }
 
     // Métodos numéricos
-    @FXML
-    private void switchToConvertion() throws IOException {
-        App.setRoot("convertion");
-    }
+    // ...existing code...
 
     @FXML
     private void switchToBisection() throws IOException {
@@ -50,6 +47,16 @@ public class firstMenuController {
     @FXML
     private void switchToDeflation() throws IOException {
         App.setRoot(("deflation"));
+    }
+
+    @FXML
+    private void switchToTaylorPolynomial() throws IOException {
+        App.setRoot("taylor-polynomial");
+    }
+
+    @FXML
+    private void switchToLeastSquares() throws IOException {
+        App.setRoot("least-squares");
     }
 
 }

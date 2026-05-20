@@ -7,18 +7,18 @@ import com.numeric.methods.App;
 public class mainController {
 
     @FXML
-    private void switchToFirstMenu() throws IOException {
-        App.setRoot("first-menu");
+    private void switchToRootsAproximationMenu() throws IOException {
+        App.setRoot("menu-roots-aproximation");
     }
 
     @FXML
-    private void switchToSecondMenu() throws IOException {
-        App.setRoot("second-menu");
+    private void switchToNumericalDifferentiationIntegration() throws IOException {
+        App.setRoot("menu-numerical-differentiation-integration");
     }
 
     @FXML
-    private void switchToThirdMenu() throws IOException {
-        App.setRoot("third-menu");
+    private void switchToOrdinaryDifferentialEquations() throws IOException {
+        App.setRoot("menu-ordinary-differential-equations");
     }
 
     @FXML

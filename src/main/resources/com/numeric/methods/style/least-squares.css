@@ -1,0 +1,21 @@
+/* least-squares.css - Estilos para la vista least-squares.fxml */
+
+.root {
+    -fx-background-color: #f9f9f9;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+}
