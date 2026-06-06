@@ -8,7 +8,7 @@ public class mullerController {
 
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("first-menu");
+        App.setRoot("menu-roots-aproximation");
     }
 
     @FXML

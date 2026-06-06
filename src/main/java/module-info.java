@@ -2,6 +2,7 @@ module com.numeric.methods {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires commons.math3;
     requires exp4j;
 
     opens com.numeric.methods to javafx.fxml;

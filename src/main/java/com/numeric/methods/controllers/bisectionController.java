@@ -18,12 +18,12 @@ public class bisectionController {
         iterationColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getIteration()));
         aColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getA()));
         bColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getB()));
+        cColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAproximacion()));
         aproxColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAproximacion()));
         faColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFa()));
         fbColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFb()));
         fcColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFc()));
         errorColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getError()));
-        aproxColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAproximacion()));
         resultsTable.setItems(tableData);
     }
 
@@ -45,6 +45,8 @@ public class bisectionController {
     @FXML
     private TableColumn<ResultRow, String> bColumn;
     @FXML
+    private TableColumn<ResultRow, String> cColumn;
+    @FXML
     private TableColumn<ResultRow, String> aproxColumn;
     @FXML
     private TableColumn<ResultRow, String> faColumn;
@@ -64,7 +66,7 @@ public class bisectionController {
 
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("first-menu");
+        App.setRoot("menu-roots-aproximation");
     }
 
 
@@ -95,6 +97,24 @@ public class bisectionController {
             }
 
             BisectionMethod method = new BisectionMethod(a, b, maxIterations, tolerance, function);
+
+            // Validación del intervalo (Teorema de Bolzano): debe existir cambio de signo
+            double fa0 = method.evaluateFunction(a);
+            double fb0 = method.evaluateFunction(b);
+            if (fa0 == 0.0) {
+                showInfoAlert(String.format("Raíz exacta encontrada en el límite inferior: x = %.6f", a));
+                return;
+            }
+            if (fb0 == 0.0) {
+                showInfoAlert(String.format("Raíz exacta encontrada en el límite superior: x = %.6f", b));
+                return;
+            }
+            if (fa0 * fb0 > 0) {
+                showErrorAlert("Intervalo no válido: la función no cambia de signo en [a, b].\n" +
+                        "(f(a) y f(b) tienen el mismo signo; no se puede aplicar Bisección con ese intervalo)");
+                return;
+            }
+
             double prevC = Double.NaN;
             int totalIterations = useIterations ? maxIterations : (int)method.iterationsNeededError();
             double currA = a;
@@ -122,6 +142,14 @@ public class bisectionController {
                     String.format("%.6f", error)
                 ));
 
+                // Paro temprano si se llegó a la raíz (exacta o por tolerancia)
+                if (fc == 0.0) {
+                    break;
+                }
+                if (!useIterations && Math.abs(fc) < tolerance) {
+                    break;
+                }
+
                 // Actualiza a y b según el método
                 if (Math.signum(fa) == Math.signum(fc)) {
                     currA = c;
@@ -140,6 +168,16 @@ public class bisectionController {
         javafx.application.Platform.runLater(() -> {
             javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
             alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+    }
+
+    private void showInfoAlert(String message) {
+        javafx.application.Platform.runLater(() -> {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+            alert.setTitle("Información");
             alert.setHeaderText(null);
             alert.setContentText(message);
             alert.showAndWait();
