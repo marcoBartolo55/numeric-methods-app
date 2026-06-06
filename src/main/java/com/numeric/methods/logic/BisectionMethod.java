@@ -4,75 +4,70 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class BisectionMethod {
-	int iteration;
-	double a, b, error;
-	String function;
+    int iteration;
+    double a, b, error;
+    private final Expression expression;
 
+    public BisectionMethod(double a, double b, int iteration, double error, String function) {
+        this.a = a;
+        this.b = b;
+        this.iteration = iteration;
+        this.error = error;
+        this.expression = new ExpressionBuilder(function).variable("x").build();
+    }
 
-	public BisectionMethod(double a, double b, int iteration, double error, String function) {
-		this.a = a;
-		this.b = b;
-		this.iteration = iteration;
-		this.error = error;
-		this.function = function;
-	}
+    public double calculateMidPoint() {
+        return a + (b - a) / 2;
+    }
 
-	public double calculateMidPoint() {
-		double c = (a + b) / 2;
-		return c;
-	}
+    public double evaluateFunction(double x) {
+        expression.setVariable("x", x);
+        return expression.evaluate();
+    }
 
-	public double evaluateFunction(double x) {
-		Expression expression = new ExpressionBuilder(function).variable("x").build();
-		expression.setVariable("x", x);
-		return expression.evaluate();
-	}
+    public double changeSign() {
+        double c = calculateMidPoint();
+        double fa = evaluateFunction(a);
+        double fc = evaluateFunction(c);
 
-	public double changeSign() {
-		double c = calculateMidPoint();
-		double fa = evaluateFunction(a);
-		double fc = evaluateFunction(c);
+        if (Math.abs(fc) < 1e-15) return c;
 
-		if (fc == 0) return c;
+        if (Math.signum(fa) == Math.signum(fc)) {
+            a = c;
+        } else {
+            b = c;
+        }
+        
+        return c;
+    }
 
-		if (Math.signum(fa) == Math.signum(fc)) {
-			a = c;
-		} else {
-			b = c;
-		}
-		
-		return c;
-	}
-
-	// Calular errores
-	public double currentIterationError() {
-		//error <= (b - a) / 2^n
-		double errorC = (b - a) / Math.pow(2, iteration);
-		return errorC;
-	}
+    public double currentIterationError() {
+        return (b - a) / Math.pow(2, iteration);
+    }
 
     public double iterationsNeededError() {
-        // n >= log2((b - a) / error)
         double n = Math.log((b - a) / error) / Math.log(2);
         return Math.ceil(n);
     }
 
-	// Método de bisección
-	public double bisection() {
-		// Teorema de Bolzano
-		if (evaluateFunction(a) * evaluateFunction(b) >= 0) {
-			throw new IllegalArgumentException("La función no cambia de signo en el intervalo [a, b].");
-		}
+    public double bisection() {
+        double fa = evaluateFunction(a);
+        double fb = evaluateFunction(b);
 
-		double c = 0;
-		int i = 1;
+        if (Math.abs(fa) < 1e-15) return a;
+        if (Math.abs(fb) < 1e-15) return b;
 
-		 while (i < iteration && (b - a) / 2 > error) {
-			c = changeSign();
-			i++;
-		}
-		return c;
+        if (Math.signum(fa) == Math.signum(fb)) {
+            throw new IllegalArgumentException("Error: No se garantiza una raíz en el intervalo [" + a + ", " + b + "] porque f(a) y f(b) tienen el mismo signo.");
+        }
 
-	}
+        double c = calculateMidPoint();
+        int i = 1;
+
+        while (i <= iteration && ((b - a) / 2.0) > error) {
+            c = changeSign();
+            i++;
+        }
+        return c;
+    }
 }
-

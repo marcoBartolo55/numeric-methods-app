@@ -15,7 +15,7 @@
             <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-            <Label text="Punto inicial (Pn):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Punto inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
             <Label text="Número de iteraciones:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -31,11 +31,11 @@
         <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
             <columns>
                 <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
-                <TableColumn fx:id="pColumn" text="Pn" prefWidth="100" />
-                <TableColumn fx:id="fpnColumn" text="f(Pn)" prefWidth="100" />
-                <TableColumn fx:id="ffpnColumn" text="f'(Pn)" prefWidth="100" />
-                <TableColumn fx:id="pnColumn" text="Pn + 1" prefWidth="100" />
-                <TableColumn fx:id="errorColumn" text="f(b)" prefWidth="100" />
+                <TableColumn fx:id="pColumn" text="x_n" prefWidth="100" />
+                <TableColumn fx:id="fpnColumn" text="f(x_n)" prefWidth="100" />
+                <TableColumn fx:id="ffpnColumn" text="f'(x_n)" prefWidth="100" />
+                <TableColumn fx:id="pnColumn" text="x_n+1" prefWidth="100" />
+                <TableColumn fx:id="errorColumn" text="Error" prefWidth="100" />
             </columns>
         </TableView>
         

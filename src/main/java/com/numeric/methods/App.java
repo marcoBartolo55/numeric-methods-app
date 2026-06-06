@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("main"), 1000, 700);
-        scene.getStylesheets().add(App.class.getResource("/com/numeric/methods/style/main.css").toExternalForm());
+        //scene.getStylesheets().add(App.class.getResource("/com/numeric/methods/style/main.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Proyecto Métodos Numéricos");
         stage.setResizable(false);
