@@ -10,6 +10,7 @@
         <String fx:value="@../style/main.css"/>
     </stylesheets>
     <children>
+    <Label text="Método de Newton-Raphson" />
         <GridPane hgap="10" vgap="10" alignment="CENTER">
             <!-- Etiquetas y campos de texto -->
             <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />

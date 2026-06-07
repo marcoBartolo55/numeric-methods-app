@@ -1,9 +1,10 @@
 package com.numeric.methods.controllers;
 
 import java.io.IOException;
-
+import java.util.List;
 import com.numeric.methods.App;
 import com.numeric.methods.logic.NewtonRaphsonMethod;
+import com.numeric.methods.logic.NewtonRaphsonMethod.ResultRow; // Importación limpia
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,38 +16,18 @@ import javafx.scene.control.TextField;
 
 public class newtonRaphsonController {
 
-    @FXML
-    private TextField functionField;
+    @FXML private TextField functionField;
+    @FXML private TextField initialPointField;
+    @FXML private TextField iterationsField;
+    @FXML private TextField errorField;
 
-    @FXML
-    private TextField initialPointField;
-
-    @FXML
-    private TextField iterationsField;
-
-    @FXML
-    private TextField errorField;
-
-    @FXML
-    private TableView<ResultRow> resultsTable;
-
-    @FXML
-    private TableColumn<ResultRow, Integer> iterationColumn;
-
-    @FXML
-    private TableColumn<ResultRow, String> pColumn;
-
-    @FXML
-    private TableColumn<ResultRow, String> fpnColumn;
-
-    @FXML
-    private TableColumn<ResultRow, String> ffpnColumn;
-
-    @FXML
-    private TableColumn<ResultRow, String> pnColumn;
-
-    @FXML
-    private TableColumn<ResultRow, String> errorColumn;
+    @FXML private TableView<ResultRow> resultsTable;
+    @FXML private TableColumn<ResultRow, Integer> iterationColumn;
+    @FXML private TableColumn<ResultRow, String> pColumn;
+    @FXML private TableColumn<ResultRow, String> fpnColumn;
+    @FXML private TableColumn<ResultRow, String> ffpnColumn;
+    @FXML private TableColumn<ResultRow, String> pnColumn;
+    @FXML private TableColumn<ResultRow, String> errorColumn;
 
     private final ObservableList<ResultRow> tableData = FXCollections.observableArrayList();
 
@@ -62,16 +43,6 @@ public class newtonRaphsonController {
     }
 
     @FXML
-    private void switchToMain() throws IOException {
-        App.setRoot("main");
-    }
-
-    @FXML
-    private void switchToMenu() throws IOException {
-        App.setRoot("menu-roots-aproximation");
-    }
-
-    @FXML
     private void calculateNewtonRaphson() {
         tableData.clear();
 
@@ -80,19 +51,13 @@ public class newtonRaphsonController {
         String iterationsText = iterationsField.getText();
         String errorText = errorField.getText();
 
-        if (function == null || function.trim().isEmpty()) {
-            showErrorAlert("Debe ingresar una funcion.");
+        if (function == null || function.trim().isEmpty() || initialPointText == null || initialPointText.trim().isEmpty()) {
+            showErrorAlert("Debe ingresar la función y el punto inicial.");
             return;
         }
 
-        if (initialPointText == null || initialPointText.trim().isEmpty()) {
-            showErrorAlert("Debe ingresar un punto inicial.");
-            return;
-        }
-
-        if ((iterationsText == null || iterationsText.trim().isEmpty()) &&
-            (errorText == null || errorText.trim().isEmpty())) {
-            showErrorAlert("Debe ingresar numero de iteraciones o tolerancia.");
+        if ((iterationsText == null || iterationsText.trim().isEmpty()) && (errorText == null || errorText.trim().isEmpty())) {
+            showErrorAlert("Debe ingresar número de iteraciones o tolerancia.");
             return;
         }
 
@@ -105,7 +70,7 @@ public class newtonRaphsonController {
             if (iterationsText != null && !iterationsText.trim().isEmpty()) {
                 maxIterations = Integer.parseInt(iterationsText.trim());
                 if (maxIterations <= 0) {
-                    showErrorAlert("El numero de iteraciones debe ser mayor que cero.");
+                    showErrorAlert("El número de iteraciones debe ser mayor que cero.");
                     return;
                 }
             } else {
@@ -117,65 +82,32 @@ public class newtonRaphsonController {
                 useTolerance = true;
             }
 
+            // 1. Instanciar la lógica
             NewtonRaphsonMethod method = new NewtonRaphsonMethod(currentP, maxIterations, tolerance, function.trim());
 
-            for (int iteration = 1; iteration <= maxIterations; iteration++) {
-                double fpn = method.evaluateFunction(currentP);
+            // 2. Ejecutar y obtener las filas calculadas en la lógica
+            List<ResultRow> executionRows = method.execute(useTolerance);
 
-                if (Math.abs(fpn) < 1e-12) {
-                    tableData.add(new ResultRow(
-                        iteration,
-                        formatValue(currentP),
-                        formatValue(fpn),
-                        "---",
-                        formatValue(currentP),
-                        "0.000000"
-                    ));
-                    showInfoAlert(String.format("Se encontro una raiz exacta en x = %.6f", currentP));
-                    break;
-                }
+            // 3. Poblar la vista
+            tableData.addAll(executionRows);
+            resultsTable.setItems(tableData);
 
-                double ffpn = method.evaluateDerivative(currentP);
-                if (Math.abs(ffpn) < 1e-12) {
-                    showErrorAlert(String.format("La derivada es cercana a cero en x = %.6f. El metodo no puede continuar.", currentP));
-                    return;
-                }
-
-                double nextP = method.calculateNextP(currentP);
-                double error = Math.abs(nextP - currentP);
-
-                tableData.add(new ResultRow(
-                    iteration,
-                    formatValue(currentP),
-                    formatValue(fpn),
-                    formatValue(ffpn),
-                    formatValue(nextP),
-                    formatValue(error)
-                ));
-
-                if (error == 0.0 || (useTolerance && error <= tolerance)) {
-                    if (useTolerance) {
-                        showInfoAlert(String.format("Se alcanzo la tolerancia configurada: %.6f", tolerance));
-                    }
-                    break;
-                }
-
-                currentP = nextP;
+            // Alerta informativa sobre la razón de término (Tolerancia o Máximo de vueltas)
+            if (!executionRows.isEmpty()) {
+                showInfoAlert(method.getExitReason());
             }
 
-            resultsTable.setItems(tableData);
         } catch (NumberFormatException ex) {
-            showErrorAlert("Los campos numericos deben contener valores validos.");
+            showErrorAlert("Los campos numéricos deben contener valores válidos.");
         } catch (IllegalArgumentException ex) {
-            showErrorAlert(ex.getMessage());
+            showErrorAlert(ex.getMessage()); // Muestra alertas de divergencia lanzadas desde la lógica
         } catch (Exception ex) {
-            showErrorAlert("Ocurrio un error inesperado: " + ex.getMessage());
+            showErrorAlert("Ocurrió un error inesperado: " + ex.getMessage());
         }
     }
 
-    private String formatValue(double value) {
-        return String.format("%.6f", value);
-    }
+    @FXML private void switchToMain() throws IOException { App.setRoot("main"); }
+    @FXML private void switchToMenu() throws IOException { App.setRoot("menu-roots-aproximation"); }
 
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -187,52 +119,9 @@ public class newtonRaphsonController {
 
     private void showInfoAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacion");
+        alert.setTitle("Información");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    public static class ResultRow {
-        private final Integer iteration;
-        private final String p;
-        private final String fpn;
-        private final String ffpn;
-        private final String pn1;
-        private final String error;
-
-        public ResultRow(int iteration, String p, String fpn, String ffpn, String pn1, String error) {
-            this.iteration = iteration;
-            this.p = p;
-            this.fpn = fpn;
-            this.ffpn = ffpn;
-            this.pn1 = pn1;
-            this.error = error;
-        }
-
-        public Integer getIteration() {
-            return iteration;
-        }
-
-        public String getP() {
-            return p;
-        }
-
-        public String getFpn() {
-            return fpn;
-        }
-
-        public String getFfpn() {
-            return ffpn;
-        }
-
-        public String getPn1() {
-            return pn1;
-        }
-
-        public String getError() {
-            return error;
-        }
-    }
-
 }

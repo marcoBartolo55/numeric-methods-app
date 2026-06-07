@@ -1,114 +1,150 @@
 package com.numeric.methods.controllers;
 
+import java.io.IOException;
+import java.util.List;
 import com.numeric.methods.App;
 import com.numeric.methods.logic.FalsePositionMethod;
+import com.numeric.methods.logic.FalsePositionMethod.ResultRow; // Importación directa del POJO interno
 
-import javafx.fxml.FXML;
-
-import javafx.scene.control.TextField;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class falsePositionController {
 
-    @FXML
-    private TextField functionField;
-    @FXML
-    private TextField lowerLimitField;
-    @FXML
-    private TextField upperLimitField;
-    @FXML
-    private TextField iterationsField;
-    @FXML
-    private TextField errorField;
+    // Componentes visuales inyectados desde el FXML
+    @FXML private TextField functionField;
+    @FXML private TextField lowerLimitField;
+    @FXML private TextField upperLimitField;
+    @FXML private TextField iterationsField;
+    @FXML private TextField errorField;
 
-    @FXML
-    private TableView<FalsePositionResult> resultsTable;
-    @FXML
-    private TableColumn<FalsePositionResult, Integer> iterationColumn;
-    @FXML
-    private TableColumn<FalsePositionResult, Double> aColumn;
-    @FXML
-    private TableColumn<FalsePositionResult, Double> bColumn;
-    @FXML
-    private TableColumn<FalsePositionResult, Double> cColumn;
-    @FXML
-    private TableColumn<FalsePositionResult, Double> aproxColumn;
-    @FXML
-    private TableColumn<FalsePositionResult, Double> errorColumn;
-    
-    @FXML
-    private void switchToMenu() throws Exception {
-        App.setRoot("menu-roots-aproximation");
-    } 
+    @FXML private TableView<ResultRow> resultsTable;
+    @FXML private TableColumn<ResultRow, Integer> iterationColumn;
+    @FXML private TableColumn<ResultRow, String> x0Column;
+    @FXML private TableColumn<ResultRow, String> x1Column;
+    @FXML private TableColumn<ResultRow, String> xrColumn;
+    @FXML private TableColumn<ResultRow, String> fx0Column;
+    @FXML private TableColumn<ResultRow, String> fx1Column;
+    @FXML private TableColumn<ResultRow, String> fxrColumn;
+    @FXML private TableColumn<ResultRow, String> errorColumn;
 
+    private final ObservableList<ResultRow> tableData = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        // Inicialización de la tabla y columnas
-        if (iterationColumn != null) iterationColumn.setCellValueFactory(new PropertyValueFactory<>("iteration"));
-        if (aColumn != null) aColumn.setCellValueFactory(new PropertyValueFactory<>("a"));
-        if (bColumn != null) bColumn.setCellValueFactory(new PropertyValueFactory<>("b"));
-        if (cColumn != null) cColumn.setCellValueFactory(new PropertyValueFactory<>("c"));
-        if (aproxColumn != null) aproxColumn.setCellValueFactory(new PropertyValueFactory<>("aprox"));
-        if (errorColumn != null) errorColumn.setCellValueFactory(new PropertyValueFactory<>("error"));
+        // Vincular celdas de la tabla con los getters estables del POJO de la lógica
+        iterationColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getIteration()));
+        x0Column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getX0()));
+        x1Column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getX1()));
+        xrColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getXr()));
+        fx0Column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFx0()));
+        fx1Column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFx1()));
+        fxrColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFxr()));
+        errorColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getError()));
+        resultsTable.setItems(tableData);
     }
 
     @FXML
-    private void calculateFalsePosition(javafx.event.ActionEvent event) {
+    private void calculateFalsePosition() {
+        tableData.clear(); // Limpiar ejecuciones históricas pasadas
+
+        String function = functionField.getText();
+        String lowerText = lowerLimitField.getText();
+        String upperText = upperLimitField.getText();
+        String iterationsText = iterationsField.getText();
+        String errorText = errorField.getText();
+
+        // Validaciones iniciales de interfaz
+        if (function == null || function.trim().isEmpty() || lowerText == null || lowerText.trim().isEmpty() || upperText == null || upperText.trim().isEmpty()) {
+            showErrorAlert("Debe rellenar los campos de la función y los límites del intervalo.");
+            return;
+        }
+
+        if ((iterationsText == null || iterationsText.trim().isEmpty()) && (errorText == null || errorText.trim().isEmpty())) {
+            showErrorAlert("Debe ingresar el número de iteraciones máximas o la tolerancia deseada.");
+            return;
+        }
+
         try {
-            String function = functionField.getText();
-            double a = Double.parseDouble(lowerLimitField.getText());
-            double b = Double.parseDouble(upperLimitField.getText());
-            int iterations = Integer.parseInt(iterationsField.getText());
-            double tol = Double.parseDouble(errorField.getText());
+            double x0 = Double.parseDouble(lowerText.trim());
+            double x1 = Double.parseDouble(upperText.trim());
+            int maxIterations = 100;
+            double tolerance = 0.0;
+            boolean useTolerance = false;
 
-            ObservableList<FalsePositionResult> data = FXCollections.observableArrayList();
-
-            double xr = 0, prevXr = 0, err = 1;
-            FalsePositionMethod method = new FalsePositionMethod(a, b, xr, 0, tol, function);
-
-            for (int i = 1; i <= iterations && err > tol; i++) {
-                prevXr = xr;
-                xr = method.reasignValueBySign();
-                err = (i == 1) ? 1 : Math.abs((xr - prevXr) / xr);
-                data.add(new FalsePositionResult(i, method.getX0(), method.getX1(), xr, xr, err));
-                if (Math.abs(method.evaluateFunction(xr)) < tol) break;
+            if (iterationsText != null && !iterationsText.trim().isEmpty()) {
+                maxIterations = Integer.parseInt(iterationsText.trim());
+                if (maxIterations <= 0) {
+                    showErrorAlert("El número de iteraciones debe ser mayor que cero.");
+                    return;
+                }
+            } else {
+                tolerance = Double.parseDouble(errorText.trim());
+                if (tolerance <= 0) {
+                    showErrorAlert("La tolerancia de error debe ser mayor que cero.");
+                    return;
+                }
+                useTolerance = true;
             }
 
-            resultsTable.setItems(data);
+            // 1. Instanciamos el motor lógico inyectándole los parámetros crudos
+            FalsePositionMethod method = new FalsePositionMethod(x0, x1, maxIterations, tolerance, function.trim());
+
+            // Validaciones rápidas de raíces exactas en las paredes del intervalo inicial
+            if (method.evaluateFunction(x0) == 0.0) {
+                showInfoAlert(String.format("Raíz exacta encontrada directamente en el límite inferior: x = %.6f", x0));
+                return;
+            }
+            if (method.evaluateFunction(x1) == 0.0) {
+                showInfoAlert(String.format("Raíz exacta encontrada directamente en el límite superior: x = %.6f", x1));
+                return;
+            }
+
+            // 2. Ejecutar y recibir el historial de renglones procesado enteramente por la lógica
+            List<ResultRow> executionRows = method.generateResults(useTolerance);
+
+            // 3. Volcar los resultados calculados a la visualización de la tabla
+            tableData.addAll(executionRows);
+            resultsTable.setItems(tableData);
+
+            // Mostrar el alert emergente con la causa de finalización exacta (Tolerancia vs Máximo de ciclos)
+            if (!executionRows.isEmpty()) {
+                showInfoAlert(method.getExitReason());
+            }
+
+        } catch (NumberFormatException ex) {
+            showErrorAlert("Los campos numéricos deben contener valores válidos.");
+        } catch (IllegalArgumentException ex) {
+            showErrorAlert(ex.getMessage()); // Captura violaciones de Bolzano desde la lógica
         } catch (Exception ex) {
-            ex.printStackTrace();
+            showErrorAlert("Ocurrió un error inesperado al procesar: " + ex.getMessage());
         }
     }
 
-    public static class FalsePositionResult {
-        private final Integer iteration;
-        private final Double a;
-        private final Double b;
-        private final Double c;
-        private final Double aprox;
-        private final Double error;
+    @FXML private void switchToMenu() throws IOException { App.setRoot("menu-roots-aproximation"); }
 
-        public FalsePositionResult(Integer iteration, Double a, Double b, Double c, Double aprox, Double error) {
-            this.iteration = iteration;
-            this.a = a;
-            this.b = b;
-            this.c = c;
-            this.aprox = aprox;
-            this.error = error;
-        }
-        public Integer getIteration() { return iteration; }
-        public Double getA() { return a; }
-        public Double getB() { return b; }
-        public Double getC() { return c; }
-        public Double getAprox() { return aprox; }
-        public Double getError() { return error; }
+    private void showErrorAlert(String message) {
+        javafx.application.Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 
-
-
+    private void showInfoAlert(String message) {
+        javafx.application.Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Información");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+    }
 }
