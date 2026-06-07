@@ -12,7 +12,6 @@ public class menuRootsEquationsController {
     }
 
     // Métodos numéricos
-    // ...existing code...
 
     @FXML
     private void switchToBisection() throws IOException {
@@ -21,7 +20,7 @@ public class menuRootsEquationsController {
 
     @FXML
     private void switchToFixPoint() throws IOException {
-        App.setRoot("fixed-point-iteration");
+        App.setRoot("fix-point");
     }
 
     @FXML
@@ -46,17 +45,12 @@ public class menuRootsEquationsController {
 
     @FXML
     private void switchToDeflation() throws IOException {
-        App.setRoot(("deflation"));
+        App.setRoot("deflation");
     }
 
     @FXML
-    private void switchToTaylorPolynomial() throws IOException {
-        App.setRoot("taylor-polynomial");
-    }
-
-    @FXML
-    private void switchToLeastSquares() throws IOException {
-        App.setRoot("least-squares");
+    private void switchToRootsPolynomials() throws IOException {
+        App.setRoot("roots-polynomials");
     }
 
 }

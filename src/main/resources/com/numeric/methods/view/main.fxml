@@ -13,8 +13,8 @@
       <Label text="Menú Principal - Opciones" />
       <GridPane hgap="120" vgap="20" alignment="CENTER">
          <Button fx:id="rootsAproximationButton" text="Raíces de Ecuaciones y Aproximación" onAction="#switchToRootsAproximationMenu" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-         <Button fx:id="numericalDifferentiationIntegrationButton" text="Diferenciación e Integración Numérica" onAction="#switchToNumericalDifferentiationIntegration" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-         <Button fx:id="ordinaryDifferentialEquationsButton" text="Ecuaciones Diferenciales Ordinarias (EDO)" onAction="#switchToOrdinaryDifferentialEquations" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+         <Button fx:id="numericalDifferentiationIntegrationButton" text="Diferenciación e Interpolación" onAction="#switchToNumericalDifferentiationIntegration" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+         <Button fx:id="ordinaryDifferentialEquationsButton" text="Ecuaciones Diferenciales e Integración" onAction="#switchToOrdinaryDifferentialEquations" GridPane.columnIndex="0" GridPane.rowIndex="2" />
       </GridPane>
    </children>
       <Button fx:id="exitButton" text="Salir" onAction="#exitApplication"/>

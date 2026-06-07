@@ -1,7 +1,5 @@
 package com.numeric.methods.controllers;
 
-
-import java.io.IOException;
 import com.numeric.methods.App;
 import com.numeric.methods.logic.FalsePositionMethod;
 

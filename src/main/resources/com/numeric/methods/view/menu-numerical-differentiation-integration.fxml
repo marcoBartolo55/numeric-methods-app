@@ -8,10 +8,18 @@
 <?import java.lang.String?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.menuNumericalDifferentationIntegrationController">
-    
     <children>
         <Label text="Menú de Métodos" />
-        <Button fx:id="backButton" text="Volver" onAction="#switchToMain" alignment="CENTER" />
+        <GridPane hgap="20" vgap="15" alignment="CENTER">
+            <Button fx:id="taylorPolynomialButton" text="Polinomio de Taylor" onAction="#switchToTaylorPolynomial" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Button fx:id="leastSquaresButton" text="Mínimos Cuadrados" onAction="#switchToLeastSquares" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Button fx:id="functionApproximationButton" text="Aproximación Polinomial a Funciones" onAction="#switchToFunctionApproximation" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Button fx:id="derivative2PointsButton" text="Derivación 2 puntos" onAction="#switchToDerivative2Points" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="derivative3PointsButton" text="Derivación 3 puntos" onAction="#switchToDerivative3Points" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        </GridPane>
+        <VBox alignment="CENTER" spacing="40.0">
+            <Button fx:id="backButton" text="Volver" onAction="#switchToMain" alignment="CENTER" />
+        </VBox>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

@@ -6,7 +6,7 @@ import com.numeric.methods.App;
 
 import javafx.fxml.FXML;
 
-public class deflationController {
+public class trapezoidSquareController {
     
     @FXML
     private void switchToMenu() throws IOException {

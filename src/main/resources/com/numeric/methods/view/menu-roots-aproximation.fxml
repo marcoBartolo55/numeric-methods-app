@@ -12,13 +12,13 @@
         <Label text="Menú de Métodos" />
         <GridPane hgap="20" vgap="15" alignment="CENTER">
             <Button fx:id="bisectionButton" text="Bisección" onAction="#switchToBisection" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Button fx:id="fixPointButton" text="Punto Fijo" onAction="#switchToFixPoint" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Button fx:id="newtonRaphsonButton" text="Newton-Raphson" onAction="#switchToNewtonRaphson" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Button fx:id="falsePositionButton" text="Falsa Posición" onAction="#switchToFalsePosition" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Button fx:id="secantButton" text="Secante" onAction="#switchToSecant" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Button fx:id="mullerButton" text="Muller" onAction="#switchToMuller" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="deflationButton" text="Deflación" onAction="#switchToDeflation" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="taylorButton" text="Polinomio de Taylor" onAction="#switchToTaylorPolynomial" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Button fx:id="leastButton" text="Mínimos Cuadrados" onAction="#switchToLeastSquares" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="falsePositionButton" text="Falsa Posición" onAction="#switchToFalsePosition" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="secantButton" text="Secante" onAction="#switchToSecant" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Button fx:id="mullerButton" text="Muller" onAction="#switchToMuller" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="deflationButton" text="Deflación" onAction="#switchToDeflation" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Button fx:id="rootsPolynomialsButton" text="Raíces de Polinomios" onAction="#switchToRootsPolynomials" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         </GridPane>
         <VBox alignment="CENTER" spacing="40.0">
             <Button fx:id="backButton" text="Volver" onAction="#switchToMain" alignment="CENTER" />

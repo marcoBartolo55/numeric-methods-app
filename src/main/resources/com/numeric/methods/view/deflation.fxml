@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.deflationController">
+    <children>
+        <GridPane hgap="10" vgap="10" alignment="CENTER">
+            <!-- Etiquetas y campos de texto -->
+            <Label text="Grado del polinomio:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="degreeField" promptText="Ej: 3" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Coeficientes (separados por comas):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="coefficientsField" promptText="Ej: 1, -4, -2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label text="Raíz Conocida (r):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="knownRootField" promptText="Ej: 2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <!-- Botón calcular -->
+            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateDeflation" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" /> -->
+        </GridPane>
+        <!-- Tabla dinámica fuera del GridPane -->
+        <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
+            <columns>
+                <TableColumn fx:id="degreeColumn" text="Grado del polinomio" prefWidth="100" />
+                <TableColumn fx:id="originalCoeficientColumn" text="Coeficientes originales a_i" prefWidth="100" />
+                <TableColumn fx:id="multiplicationColumn" text="Operación multiplicaciónb_i x r" prefWidth="100" />
+                <TableColumn fx:id="ffpnColumn" text="Nuevo coeficiente b_i" prefWidth="100" />
+            </columns>
+        </TableView>
+        
+        <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
+
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+
+    
+</VBox>
