@@ -21,7 +21,7 @@ public class falsePositionController {
     @FXML private TextField lowerLimitField;
     @FXML private TextField upperLimitField;
     @FXML private TextField iterationsField;
-    @FXML private TextField errorField;
+    @FXML private TextField toleranceField;
 
     @FXML private TableView<ResultRow> resultsTable;
     @FXML private TableColumn<ResultRow, Integer> iterationColumn;
@@ -37,7 +37,7 @@ public class falsePositionController {
 
     @FXML
     public void initialize() {
-        // Vincular celdas de la tabla con los getters estables del POJO de la lógica
+        
         iterationColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getIteration()));
         x0Column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getX0()));
         x1Column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getX1()));
@@ -51,13 +51,13 @@ public class falsePositionController {
 
     @FXML
     private void calculateFalsePosition() {
-        tableData.clear(); // Limpiar ejecuciones históricas pasadas
+        tableData.clear();
 
         String function = functionField.getText();
         String lowerText = lowerLimitField.getText();
         String upperText = upperLimitField.getText();
         String iterationsText = iterationsField.getText();
-        String errorText = errorField.getText();
+        String errorText = toleranceField.getText();
 
         // Validaciones iniciales de interfaz
         if (function == null || function.trim().isEmpty() || lowerText == null || lowerText.trim().isEmpty() || upperText == null || upperText.trim().isEmpty()) {

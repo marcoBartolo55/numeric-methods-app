@@ -37,4 +37,14 @@ public class menuNumericalDifferentationIntegrationController {
 	private void switchToDerivative3Points() throws IOException {
 		App.setRoot("derivative-3-points");
 	}
+
+	@FXML
+	private void switchToNevilleInterpolation() throws IOException {
+		App.setRoot("neville-interpolation");
+	}
+
+	@FXML
+	private void switchToDividedDifferences() throws IOException {
+		App.setRoot("divided-differences");
+	}
 }

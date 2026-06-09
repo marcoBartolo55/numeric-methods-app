@@ -6,7 +6,7 @@ import com.numeric.methods.App;
 
 import javafx.fxml.FXML;
 
-public class trapezoidSquareController {
+public class taylorPolynomialController {
     
     @FXML
     private void switchToMenu() throws IOException {

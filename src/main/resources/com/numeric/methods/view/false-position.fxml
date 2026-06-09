@@ -26,17 +26,19 @@
             <TextField fx:id="toleranceField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
             <!-- Botón calcular -->
-            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateFalsePosition" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />
+            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateFalsePosition" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" /> -->
         </GridPane>
         <!-- Tabla dinámica fuera del GridPane -->
         <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
             <columns>
                 <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
-                <TableColumn fx:id="aColumn" text="x0" prefWidth="100" />
-                <TableColumn fx:id="bColumn" text="x1" prefWidth="100" />
-                <TableColumn fx:id="cColumn" text="xr" prefWidth="100" />
-                <TableColumn fx:id="aproxColumn" text="Aproximación" prefWidth="140" />
-                <TableColumn fx:id="errorColumn" text="Error" prefWidth="140" />
+                <TableColumn fx:id="x0Column" text="x0" prefWidth="100" />
+                <TableColumn fx:id="x1Column" text="x1" prefWidth="100" />
+                <TableColumn fx:id="xrColumn" text="xr" prefWidth="100" />
+                <TableColumn fx:id="fx0Column" text="f(x0)" prefWidth="140" />
+                <TableColumn fx:id="fx1Column" text="f(x1)" prefWidth="140" />
+                <TableColumn fx:id="fxrColumn" text="f(xr)" prefWidth="140" />
+                <TableColumn fx:id="errorColumn" text="Error %" prefWidth="140" />
             </columns>
         </TableView>
         

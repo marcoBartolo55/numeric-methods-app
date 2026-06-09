@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--TODO: Agregar una capa trabajar con numeros imaginarios-->
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
@@ -7,6 +9,7 @@
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.mullerController">
     <children>
+    <Label text="Método de Muller" />
         <GridPane hgap="10" vgap="10" alignment="CENTER">
             <!-- Etiquetas y campos de texto -->
              <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -29,7 +32,7 @@
             <Label text="Grado de Error:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
             <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-            <Button fx:id="toImaginaryNumbers" text="Imaginarios" onAction="#switchToMullerIm" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER" />
+            <!--<Button fx:id="toImaginaryNumbers" text="Imaginarios" onAction="#switchToMullerIm" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER" />-->
             <!-- Botón calcular -->
             <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateMuller" GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" alignment="CENTER" /> -->
         </GridPane>

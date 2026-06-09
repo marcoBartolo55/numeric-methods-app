@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.secantController">
-	<children>
-		<Label text="Método de la Secante" />
-		<Label text="Sección en construcción" />
-		<Button text="Volver" onAction="#switchToMenu" />
-	</children>
-	<padding>
-		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-	</padding>
+    <children>
+    <Label text="Secante" />
+        <GridPane hgap="10" vgap="10" alignment="CENTER">
+            <!-- Etiquetas y campos de texto -->
+            <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Límite inferior (a):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="lowerLimitField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label text="Límite superior (b):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="upperLimitField" promptText="Ej: 2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <Label text="Número de iteraciones:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="iterationsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+            <Label text="Tolerancia de error:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="toleranceField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+            <!-- Botón calcular -->
+            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateSecant" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />
+        </GridPane>
+        <!-- Tabla dinámica fuera del GridPane -->
+        <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
+            <columns>
+                <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
+                <TableColumn fx:id="xnMinus1Column" text="X_{n-1}" prefWidth="100" />
+				<TableColumn fx:id="fxnMinus1Column" text="f(X_{n-1})" prefWidth="100" />
+                <TableColumn fx:id="xnPlusColumn" text="X_{n+1}" prefWidth="100" />
+                <TableColumn fx:id="fxnPlusColumn" text="f(X_{n+1})" prefWidth="100" />
+                <TableColumn fx:id="errorColumn" text="Error %" prefWidth="140" />
+            </columns>
+        </TableView>
+        
+        <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
+
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+
+    
 </VBox>

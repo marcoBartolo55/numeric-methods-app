@@ -1,5 +1,5 @@
 package com.numeric.methods.logic;
 
-public class Derivation3Points {
+public class Derivative3Points {
     
 }

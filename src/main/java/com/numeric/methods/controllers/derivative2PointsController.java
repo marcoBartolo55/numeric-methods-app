@@ -6,10 +6,10 @@ import com.numeric.methods.App;
 
 import javafx.fxml.FXML;
 
-public class derivation2PointsController {
+public class derivative2PointsController {
     
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("menu-roots-aproximation");
+        App.setRoot("menu-ordinary-differential-equations");
     }
 }

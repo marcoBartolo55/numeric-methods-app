@@ -44,11 +44,6 @@ public class menuOrdinaryDifferentialEquationsController {
 	}
 
 	@FXML
-	private void switchToTrapezoidSquare() throws IOException {
-		App.setRoot("trapezoid-square");
-	}
-
-	@FXML
 	private void switchToAdaptiveSimpson() throws IOException {
 		App.setRoot("adaptive-simpson");
 	}
@@ -64,8 +59,14 @@ public class menuOrdinaryDifferentialEquationsController {
 	}
 
 	@FXML
+	private void switchToRungeKutta3() throws IOException {
+		App.setRoot("runge-kutta-3");
+	}
+
+	@FXML
 	private void switchToRungeKutta4() throws IOException {
 		App.setRoot("runge-kutta-4");
 	}
+
 }
 

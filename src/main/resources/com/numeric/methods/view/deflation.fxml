@@ -7,6 +7,7 @@
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.deflationController">
     <children>
+    <Label text="Deflación de polinomios" />
         <GridPane hgap="10" vgap="10" alignment="CENTER">
             <!-- Etiquetas y campos de texto -->
             <Label text="Grado del polinomio:" GridPane.columnIndex="0" GridPane.rowIndex="0" />

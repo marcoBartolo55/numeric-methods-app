@@ -11,13 +11,4 @@ public class mullerController {
         App.setRoot("menu-roots-aproximation");
     }
 
-    @FXML
-    private void switchToMuller() throws IOException {
-        App.setRoot("muller");
-    }
-
-    @FXML
-    private void switchToMullerIm() throws IOException {
-        App.setRoot("mullerIm");
-    }
 }

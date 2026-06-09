@@ -1,11 +1,11 @@
-/* Least Squares - Darker Blue Palette Adapted */
+/* Least Squares Method - Darker Blue Palette Adapted */
 .root {
     -fx-background-color: linear-gradient(to bottom right, #232526, #283e51 80%);
     -fx-font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .label {
-    -fx-font-size: 16px; /* Ajustado ligeramente para mejor legibilidad */
+    -fx-font-size: 18px; /* Reducido ligeramente de 20px para que encaje mejor en GridPanes */
     -fx-text-fill: #90caf9;
     -fx-font-weight: 600;
     -fx-effect: dropshadow(gaussian, #263238, 6, 0.2, 0, 1);
@@ -29,48 +29,99 @@
     -fx-border-color: #90caf9;
 }
 
-/* --- ESTILIZACIÓN DE LA TABLA DE DATOS (TABLE VIEW) --- */
+.text-field {
+    -fx-background-color: #1f2933; 
+    -fx-text-fill: #ffffff; 
+    -fx-border-color: #1565c0; 
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8 16 8 16;
+    -fx-font-size: 16px;
+    -fx-prompt-text-fill: #7b8794; 
+}
+
+.text-field:focused {
+    -fx-border-color: #90caf9; 
+    -fx-effect: dropshadow(gaussian, #90caf9, 4, 0.3, 0, 0);
+}
+
+/* --- ESTILOS COMPLEMENTARIOS PARA LA NUEVA PANTALLA --- */
+
+/* Selector ComboBox integrado a tu paleta */
+.combo-box {
+    -fx-background-color: #1f2933;
+    -fx-border-color: #1565c0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+.combo-box .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-effect: none;
+}
+.combo-box .list-cell {
+    -fx-background-color: #1f2933;
+    -fx-text-fill: #ffffff;
+}
+
+/* TableView Estilo Darker Blue */
 .table-view {
     -fx-background-color: #1f2933;
     -fx-border-color: #1565c0;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
-    -fx-padding: 5;
 }
-
-/* Encabezados de la tabla (Columnas X / Y) */
 .table-view .column-header-background {
     -fx-background-color: #283593;
 }
-
-.table-view .column-header, .table-view .filler {
-    -fx-background-color: transparent;
-    -fx-border-color: #3949ab;
-    -fx-border-width: 0 1 1 0; /* Líneas divisorias del encabezado */
+.table-view .column-header {
+    -fx-background-color: #283593;
+    -fx-border-color: transparent #1565c0 transparent transparent;
 }
-
 .table-view .column-header .label {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #90caf9;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-effect: none; /* Quitamos la sombra del texto para que no sature la tabla */
+    -fx-effect: none;
 }
-
-/* Celdas de la tabla */
-.table-row-cell {
+.table-view .table-row-cell {
     -fx-background-color: #1f2933;
     -fx-text-fill: #ffffff;
+    -fx-border-color: transparent transparent #283e51 transparent;
+}
+.table-view .table-row-cell:odd {
+    -fx-background-color: #18222b;
 }
 
-.table-row-cell:odd {
-    -fx-background-color: #24303c; /* Alternancia de color sutil para las filas pares/impares */
+/* --- ESTILOS PARA EL SCATTER CHART (DARKER BLUE ADAPTED) --- */
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: #1f2933;
+    -fx-border-color: #1565c0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
 }
 
-.table-row-cell:selected {
-    -fx-background-color: #1565c0; /* Color de fila seleccionada */
+.chart-title {
+    -fx-text-fill: #90caf9;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 
-.table-cell {
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
+/* Color del texto de las etiquetas en los ejes X y Y */
+.axis-label {
+    -fx-text-fill: #90caf9;
+    -fx-font-size: 13px;
+}
+
+.axis {
+    -fx-tick-label-fill: #ffffff; /* Números de las escalas en blanco */
+    -fx-tick-mark-stroke: #1565c0;
+}
+
+/* Estilo para los puntitos (nodos) de dispersión en el plano */
+.chart-symbol {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 50%, #90caf9, #1565c0);
+    -fx-background-radius: 5px;
+    -fx-padding: 5px; /* Tamaño del punto en pantalla */
 }

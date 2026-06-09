@@ -15,14 +15,15 @@
             <Button fx:id="trapezoidalRuleButton" text="Regla del Trapecio" onAction="#switchToTrapezoidalRule" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Button fx:id="simpson13Button" text="Regla de Simpson 1/3" onAction="#switchToSimpson13" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Button fx:id="simpson38Button" text="Regla de Simpson 3/8" onAction="#switchToSimpson38" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="multipleSimpson13Button" text="Simpson 1/3 Múltiple" onAction="#switchToMultipleSimpson13" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="multipleSimpson13Button" text="Simpson 1/3 Múltiple" onAction="#switchToMultipleSimpson13" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Button fx:id="rombergButton" text="Romberg" onAction="#switchToRomberg" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="trapezoidSquareButton" text="Cuadratura de Trapecio" onAction="#switchToTrapezoidSquare" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Button fx:id="adaptiveSimpsonButton" text="Simpson Adaptativo" onAction="#switchToAdaptiveSimpson" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="eulerMethodButton" text="Método de Euler" onAction="#switchToEulerMethod" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <Button fx:id="rungeKutta2Button" text="Runge Kutta 2" onAction="#switchToRungeKutta2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="rungeKutta4Button" text="Runge Kutta 4" onAction="#switchToRungeKutta4" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="adaptiveSimpsonButton" text="Simpson Adaptativo" onAction="#switchToAdaptiveSimpson" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Button fx:id="eulerMethodButton" text="Método de Euler" onAction="#switchToEulerMethod" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="rungeKutta2Button" text="Runge Kutta 2" onAction="#switchToRungeKutta2" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <Button fx:id="rungeKutta3Button" text="Runge Kutta 3" onAction="#switchToRungeKutta3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="rungeKutta4Button" text="Runge Kutta 4" onAction="#switchToRungeKutta4" GridPane.columnIndex="0" GridPane.rowIndex="5" />
         </GridPane>
+        
         <VBox alignment="CENTER" spacing="40.0">
             <Button fx:id="backButton" text="Volver" onAction="#switchToMain" alignment="CENTER" />
         </VBox>
