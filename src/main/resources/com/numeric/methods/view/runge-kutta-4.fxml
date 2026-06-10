@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.rungeKutta4Controller">
+    <children>
+    <Label text="Runge-Kutta 4" />
+        <GridPane hgap="10" vgap="10" alignment="CENTER">
+            <!-- Etiquetas y campos de texto -->
+            <Label text="Ecuación diferencial f(x,y):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Condición inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label text="Condición inicial (y0):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="initialValueField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <Label text="Punto final a evaluar (x_f):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="iterationsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+            <Label text="Tamaño del paso (h):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+            <!-- Botón calcular -->
+            <!--<Button fx:id="calculateButton" text="Calcular" onAction="#calculateRungeKutta4" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />-->
+        </GridPane>
+        <!-- Tabla dinámica fuera del GridPane -->
+        <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
+            <columns>
+                <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
+                <TableColumn fx:id="stepColumn" text="x_n" prefWidth="100" />
+                <TableColumn fx:id="xValueColumn" text="x_i" prefWidth="100" />
+                <TableColumn fx:id="yValueColumn" text="y_i" prefWidth="100" />
+                <TableColumn fx:id="meanSlopeColumn" text="Pendiente promedio (K_m)" prefWidth="100" />
+            </columns>
+        </TableView>
+        
+        <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
+
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+
+    
+</VBox>

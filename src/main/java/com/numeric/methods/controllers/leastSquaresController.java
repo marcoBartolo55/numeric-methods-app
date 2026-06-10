@@ -28,6 +28,6 @@ public class leastSquaresController { // Primera letra en Mayúscula
 
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("menu-roots-aproximation");
+        App.setRoot("menu-numerical-differentiation-integration");
     }
 }

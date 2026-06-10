@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox alignment="CENTER" spacing="20.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.taylorEdoController">
+    <children>
+        <Label text="Método de Taylor para EDO (Primer Orden)" styleClass="label" />
+        
+        <HBox spacing="30.0" alignment="CENTER" VBox.vgrow="ALWAYS">
+            <children>
+                <VBox spacing="15.0" alignment="TOP_CENTER" prefWidth="380.0">
+                    <children>
+                        <GridPane hgap="10" vgap="12" alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                            </columnConstraints>
+                            <children>
+                                <Label text="EDO dy/dx = f(x,y):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="edoField" promptText="Ej: x + y" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="text-field" />
+
+                                <Label text="Condición Inicial x0:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <TextField fx:id="xZeroField" promptText="Ej: 0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="text-field" />
+
+                                <Label text="Condición Inicial y0:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <TextField fx:id="yZeroField" promptText="Ej: 1.0" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="text-field" />
+
+                                <Label text="Evaluar hasta xf:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                <TextField fx:id="xFinalField" promptText="Ej: 1.0" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="text-field" />
+
+                                <Label text="Tamaño del Paso (h):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                <TextField fx:id="hStepField" promptText="Ej: 0.1" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="text-field" />
+
+                                <Label text="Grado del Polinomio (n):" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                <TextField fx:id="degreeField" promptText="Ej: 4" GridPane.columnIndex="1" GridPane.rowIndex="5" styleClass="text-field" />
+                            </children>
+                        </GridPane>
+                        
+                        <HBox spacing="10.0" alignment="CENTER">
+                            <children>
+                                </children>
+                        </HBox>
+                        
+                        <Separator prefWidth="200.0" />
+                        
+                        <GridPane hgap="10" vgap="10" alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="210.0" />
+                            </columnConstraints>
+                            <children>
+                                <Label text="Aproximación y(xf):" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 13px;" />
+                                <TextField fx:id="finalResultField" editable="false" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-text-fill: #64DFDF; -fx-font-weight: bold;" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+                
+                <VBox spacing="10.0" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Historial de Puntos Calculados" styleClass="label" style="-fx-font-size: 16px;" />
+                        <TableView fx:id="resultsTable" prefHeight="380.0" prefWidth="550.0" styleClass="table-view">
+                            <columns>
+                                <TableColumn fx:id="stepColumn" text="Paso (i)" prefWidth="80.0" />
+                                <TableColumn fx:id="xColumn" text="x_i" prefWidth="120.0" />
+                                <TableColumn fx:id="yColumn" text="y_i" prefWidth="140.0" />
+                                <TableColumn fx:id="termsColumn" text="Suma de Términos Taylor" prefWidth="190.0" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        
+        <Button fx:id="secondaryButton" text="Volver al Menú" onAction="#switchToMenu" styleClass="button" />
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

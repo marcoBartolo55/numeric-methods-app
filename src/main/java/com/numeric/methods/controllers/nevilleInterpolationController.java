@@ -6,10 +6,10 @@ import com.numeric.methods.App;
 
 import javafx.fxml.FXML;
 
-public class richardsonExtrapolationController {
+public class nevilleInterpolationController {
     
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("menu-ordinary-differential-equations");
+        App.setRoot("menu-numerical-differentiation-integration");
     }
 }

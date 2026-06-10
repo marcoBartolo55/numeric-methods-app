@@ -6,7 +6,7 @@ import com.numeric.methods.App;
 
 import javafx.fxml.FXML;
 
-public class richardsonExtrapolationController {
+public class rungeKutta3Controller {
     
     @FXML
     private void switchToMenu() throws IOException {

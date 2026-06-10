@@ -10,6 +10,6 @@ public class rungeKutta2Controller {
     
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("menu-roots-aproximation");
+        App.setRoot("menu-ordinary-differential-equations");
     }
 }

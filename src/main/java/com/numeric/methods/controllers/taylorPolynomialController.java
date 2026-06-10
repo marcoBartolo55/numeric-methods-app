@@ -10,6 +10,6 @@ public class taylorPolynomialController {
     
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("menu-roots-aproximation");
+        App.setRoot("menu-numerical-differentiation-integration");
     }
 }

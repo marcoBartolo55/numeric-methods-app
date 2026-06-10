@@ -23,7 +23,7 @@
             <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
             <!-- Botón calcular -->
-            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateTaylorPolynomial" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />
+            <!--<Button fx:id="calculateButton" text="Calcular" onAction="#calculateTaylorPolynomial" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />-->
         </GridPane>
         <!-- Tabla dinámica fuera del GridPane -->
         <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">

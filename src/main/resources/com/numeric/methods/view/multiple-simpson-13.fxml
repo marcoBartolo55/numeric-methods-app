@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import java.lang.String?>
 
+
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.multipleSimpsonController">
     <children>
     <Label text="Simpson Múltiple 1/3" />
@@ -23,7 +24,7 @@
             <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
             <!-- Botón calcular -->
-            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateFixPoint" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />
+            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateMultipleSimpson" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" /> -->
         </GridPane>
         <!-- Tabla dinámica fuera del GridPane -->
         <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">

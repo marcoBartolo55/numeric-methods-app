@@ -10,6 +10,6 @@ public class trapezoidalRuleController {
     
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("menu-roots-aproximation");
+        App.setRoot("menu-ordinary-differential-equations");
     }
 }

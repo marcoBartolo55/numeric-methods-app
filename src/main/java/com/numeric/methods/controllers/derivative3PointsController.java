@@ -10,6 +10,6 @@ public class derivative3PointsController {
     
     @FXML
     private void switchToMenu() throws IOException {
-        App.setRoot("menu-ordinary-differential-equations");
+        App.setRoot("menu-numerical-differentiation-integration");
     }
 }
