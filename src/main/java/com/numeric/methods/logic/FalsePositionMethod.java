@@ -7,7 +7,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class FalsePositionMethod {
     private final int maxIterations;
-    private final double maxError; // Tolerancia pedida por el usuario
+    private final double maxError;
     private double x0, x1, xr;
     private final Expression expression;
     private String exitReason = "Se alcanzó el límite máximo de iteraciones.";
@@ -132,13 +132,36 @@ public class FalsePositionMethod {
             this.error = error;
         }
 
-        public Integer getIteration() { return iteration; }
-        public String getX0() { return x0; }
-        public String getX1() { return x1; }
-        public String getXr() { return xr; }
-        public String getFx0() { return fx0; }
-        public String getFx1() { return fx1; }
-        public String getFxr() { return fxr; }
-        public String getError() { return error; }
+        public Integer getIteration() {
+            return iteration; 
+        }
+
+        public String getX0() {
+            return x0;
+        }
+
+        public String getX1() {
+            return x1;
+        }
+
+        public String getXr() {
+            return xr;
+        }
+
+        public String getFx0() {
+            return fx0;
+        }
+
+        public String getFx1() {
+            return fx1;
+        }
+
+        public String getFxr() {
+            return fxr;
+        }
+
+        public String getError() {
+            return error;
+        }
     }
 }

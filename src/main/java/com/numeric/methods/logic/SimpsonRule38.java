@@ -3,11 +3,11 @@ package com.numeric.methods.logic;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class SimpsonRule13 {
+public class SimpsonRule38 {
     private double b, a;
     private final Expression expression;
 
-    public SimpsonRule13(String function, double a, double b) {
+    public SimpsonRule38(String function, double a, double b) {
         this.a = a;
         this.b = b;
         this.expression = new ExpressionBuilder(function).variable("x").build();
@@ -18,23 +18,22 @@ public class SimpsonRule13 {
         return expression.evaluate();
     }
 
-    public double midPoint() {
-        double c = (a + b) / 2.0;
-        return c;
+    public double midPoint1() {
+        double c1 = a + calculateStep();
+        return c1;
+    }
+
+    public double midPoint2() {
+        double c2 = a + 2.0 * calculateStep();
+        return c2;
     }
 
     public double calculateStep() {
-        double h = (b - a) / 2.0;
+        double h = (b - a) / 3.0;
         return h;
     }
 
     public double calculateIntegral() {
-        double h = calculateStep();
-        double c = midPoint();
-        double fa = evaluateFunction(a);
-        double fb = evaluateFunction(b);
-        double fc = evaluateFunction(c);
-        return (h / 3.0) * (fa + 4.0 * fc + fb);
+        return ((3.0 * calculateStep()) * (evaluateFunction(a) + 3.0 * evaluateFunction(midPoint1()) + 3.0 * evaluateFunction(midPoint2()) + evaluateFunction(b))) / 8.0;
     }
-
 }

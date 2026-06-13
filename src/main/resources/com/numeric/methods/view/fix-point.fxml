@@ -13,7 +13,7 @@
             <Label text="Función g(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-            <Label text="Aproximación inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Aproximación inicial (x_0):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
             <Label text="Número de iteraciones:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -23,14 +23,14 @@
             <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
             <!-- Botón calcular -->
-            <!--<Button fx:id="calculateButton" text="Calcular" onAction="#calculateFixPoint" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />-->
+            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateFixPoint" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />
         </GridPane>
         <!-- Tabla dinámica fuera del GridPane -->
         <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
             <columns>
                 <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
-                <TableColumn fx:id="pColumn" text="x_i" prefWidth="100" />
-                <TableColumn fx:id="fpnColumn" text="g(x_i)[x_{i+1}]" prefWidth="100" />
+                <TableColumn fx:id="x0Column" text="x_i" prefWidth="100" />
+                <TableColumn fx:id="gxnColumn" text="g(x_i)[x_{i+1}]" prefWidth="100" />
                 <TableColumn fx:id="errorColumn" text="Error" prefWidth="100" />
             </columns>
         </TableView>

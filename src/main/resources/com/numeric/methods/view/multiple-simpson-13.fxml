@@ -18,13 +18,18 @@
             <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
             <Label text="Límite superior (b):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="iterationsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="finalPointField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-            <Label text="Número de segmentos (n):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Número de segmentos PAR (n):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="segmentsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+            <Separator GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" />
+
+            <Label text="Resultado:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <TextField fx:id="resultField" editable="false" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2" />
 
             <!-- Botón calcular -->
-            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateMultipleSimpson" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" /> -->
+            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateMultipleSimpson" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />
         </GridPane>
         <!-- Tabla dinámica fuera del GridPane -->
         <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
@@ -32,8 +37,8 @@
                 <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
                 <TableColumn fx:id="xiColumn" text="x_n" prefWidth="100" />
                 <TableColumn fx:id="fxiColumn" text="f(x_n)" prefWidth="100" />
-                <TableColumn fx:id="multiplicadorColumn" text="f'(x_n)" prefWidth="100" />
-                <TableColumn fx:id="contributionColumn" text="x_n+1" prefWidth="100" />
+                <TableColumn fx:id="weightColumn" text="Peso" prefWidth="100" />
+                <TableColumn fx:id="contributionColumn" text="Contribución" prefWidth="100" />
             </columns>
         </TableView>
         

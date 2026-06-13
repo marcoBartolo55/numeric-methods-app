@@ -19,8 +19,13 @@
             <Label text="Límite inferior (a):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <TextField fx:id="finalPointField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
+            <Separator GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" />
+
+            <Label text="Resultado:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="resultField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
             <!-- Botón calcular -->
-            <!--<Button fx:id="calculateButton" text="Calcular" onAction="#calculateSimpson38" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />-->
+            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateSimpson38" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />
         </GridPane>
         
         <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
