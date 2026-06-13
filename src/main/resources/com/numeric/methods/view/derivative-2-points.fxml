@@ -11,7 +11,8 @@
     <Label text="Derivada de 2 puntos" />
         <GridPane hgap="10" vgap="10" alignment="CENTER">
             <!-- Etiquetas y campos de texto -->
-            <ComboBox fx:id="methodComboBox" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="Método:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <ComboBox fx:id="methodComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="Selecciona...">
                 <items>
                 <FXCollections fx:factory="observableArrayList">
                         <String fx:value="h igualmente espaciado" />
@@ -20,28 +21,34 @@
                 </items>
             </ComboBox>
 
-            <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-            <Label text="Punto inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Punto inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-            <Label text="Número de iteraciones:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="iterationsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Tamaño del paso (h):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="stepSizeField" promptText="Ej: 0.1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-            <Label text="Grado de Error:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Coordenadas de los puntos (x0, y0, x1, y1):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="coordinatesField" promptText="Ej: 1.0, 5.2, 1.4, 7.8" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+            <Label text="Resultados para h igualemente espaciada:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextField fx:id="backwardField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="centralField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="forwardField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
             <!-- Botón calcular -->
-            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateDerivative2Points" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />-->
+            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateDerivative2Points" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER" />
         </GridPane>
         <!-- Tabla dinámica fuera del GridPane -->
-        <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
+        <Label text="Resultados para h no igualemente espaciada:" />
+        <TableView fx:id="resultTable" prefHeight="400" prefWidth="800">
             <columns>
-                <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
-                <TableColumn fx:id="xColumn" text="x_n" prefWidth="100" />
-                <TableColumn fx:id="fxColumn" text="f(x_n)" prefWidth="100" />
-                <TableColumn fx:id="ffxColumn" text="f'(x_n)" prefWidth="100" />
+                <TableColumn fx:id="pointColumn" text="Punto (i)" prefWidth="100" />
+                <TableColumn fx:id="xColumn" text="x_i" prefWidth="100" />
+                <TableColumn fx:id="fxColumn" text="y_i=f(x_i)" prefWidth="100" />
+                <TableColumn fx:id="ffxColumn" text="Pendiente / Derivada Aproximada" prefWidth="100" />
             </columns>
         </TableView>
         
