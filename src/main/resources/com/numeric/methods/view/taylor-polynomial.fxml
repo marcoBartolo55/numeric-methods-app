@@ -3,47 +3,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import java.lang.String?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.taylorPolynomialController">
     <children>
-    <Label text="Polinomio de Taylor" />
+        <Label text="Polinomio de Taylor" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        
         <GridPane hgap="10" vgap="10" alignment="CENTER">
-            <!-- Etiquetas y campos de texto -->
             <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="functionField" promptText="Ej: sin(x)" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-            <Label text="Punto inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Punto de expansión (a):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="expansionPointField" promptText="Ej: 0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            
+            <Label text="Valor a evaluar (x):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="targetXField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-            <Label text="Número de iteraciones:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="iterationsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Orden del polinomio (n):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="orderField" promptText="Ej: 5" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-            <Label text="Grado de Error:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            <!-- Botón calcular -->
-            <!--<Button fx:id="calculateButton" text="Calcular" onAction="#calculateTaylorPolynomial" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER" />-->
+            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateTaylor" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" maxWidth="Infinity" />
         </GridPane>
-        <!-- Tabla dinámica fuera del GridPane -->
-        <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
+
+        <TableView fx:id="resultsTable" prefHeight="400" prefWidth="600">
             <columns>
-                <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
-                <TableColumn fx:id="pColumn" text="x_n" prefWidth="100" />
-                <TableColumn fx:id="fpnColumn" text="f(x_n)" prefWidth="100" />
-                <TableColumn fx:id="ffpnColumn" text="f'(x_n)" prefWidth="100" />
-                <TableColumn fx:id="pnColumn" text="x_n+1" prefWidth="100" />
-                <TableColumn fx:id="errorColumn" text="Error" prefWidth="100" />
+                <TableColumn fx:id="nColumn" text="Orden (n)" prefWidth="100" />
+                <TableColumn fx:id="termColumn" text="Valor del Término" prefWidth="250" />
+                <TableColumn fx:id="sumColumn" text="Suma Parcial" prefWidth="250" />
             </columns>
         </TableView>
         
         <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
-
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-
-
-    
 </VBox>

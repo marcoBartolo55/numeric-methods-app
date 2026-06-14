@@ -2,45 +2,38 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
 <VBox alignment="CENTER" spacing="20.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.dividedDifferencesController">
     <children>
-        <Label text="Interpolación de Newton (Diferencias Divididas)" styleClass="label" />
+        <Label text="Interpolación de Newton (Diferencias Divididas)" styleClass="label" style="-fx-font-size: 20px;" />
         
         <HBox spacing="30.0" alignment="CENTER" VBox.vgrow="ALWAYS">
             <children>
                 <VBox spacing="15.0" alignment="TOP_CENTER" prefWidth="380.0">
                     <children>
                         <GridPane hgap="10" vgap="12" alignment="CENTER">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="160.0" />
-                            </columnConstraints>
-                            <children>
-                                <Label text="Número de Puntos:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="pointsCountField" promptText="Ej: 4" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="text-field" />
+                            <Label text="Número de Puntos:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <TextField fx:id="pointsCountField" promptText="Ej: 4" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                                <Label text="Valor x a evaluar:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                <TextField fx:id="evalXField" promptText="Ej: 1.5 (Opcional)" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="text-field" />
-                            </children>
+                            <Label text="Valor x a evaluar:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <TextField fx:id="evalXField" promptText="Ej: 1.5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         </GridPane>
                         
-                        <HBox spacing="15.0" alignment="CENTER">
-                            <children>
-                                </children>
+                        <HBox spacing="10.0" alignment="CENTER">
+                            <Button text="Generar Tabla" onAction="#handleGenerateTable" />
+                            <Button text="Calcular" onAction="#calculateDividedDifferences" />
                         </HBox>
                         
-                        <Separator prefWidth="200.0" />
+                        <Separator />
                         
-                        <Label text="Datos Experimentales" styleClass="label" style="-fx-font-size: 16px;" />
-                        <TableView fx:id="captureTable" prefHeight="220.0" prefWidth="350.0" styleClass="table-view">
+                        <Label text="Datos Experimentales" styleClass="label" />
+                        <TableView fx:id="captureTable" editable="true" prefHeight="200.0" prefWidth="350.0">
                             <columns>
                                 <TableColumn fx:id="iCaptureColumn" text="i" prefWidth="50.0" />
-                                <TableColumn fx:id="xCaptureColumn" text="Coordenada X_i" prefWidth="140.0" />
-                                <TableColumn fx:id="yCaptureColumn" text="Coordenada Y_i" prefWidth="140.0" />
+                                <TableColumn fx:id="xCaptureColumn" text="X_i" prefWidth="140.0" />
+                                <TableColumn fx:id="yCaptureColumn" text="Y_i" prefWidth="140.0" />
                             </columns>
                         </TableView>
                     </children>
@@ -48,35 +41,22 @@
                 
                 <VBox spacing="15.0" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label text="Tabla de Diferencias Divididas" styleClass="label" style="-fx-font-size: 16px;" />
+                        <Label text="Tabla de Diferencias Divididas" styleClass="label" />
+                        <TableView fx:id="pyramidResultsTable" prefHeight="260.0" prefWidth="500.0" />
                         
-                        <TableView fx:id="pyramidResultsTable" prefHeight="260.0" prefWidth="500.0" styleClass="table-view">
-                            <columns>
-                                <TableColumn fx:id="iResultColumn" text="i" prefWidth="50.0" />
-                                <TableColumn fx:id="xResultColumn" text="x_i" prefWidth="100.0" />
-                                <TableColumn fx:id="fxResultColumn" text="f(x_i)" prefWidth="110.0" />
-                                </columns>
-                        </TableView>
-                        
-                        <GridPane hgap="10" vgap="10" alignment="CENTER_LEFT" VBox.vgrow="NEVER">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="380.0" />
-                            </columnConstraints>
-                            <children>
-                                <Label text="Polinomio P(x) =" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="polynomialOutputField" editable="false" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-family: 'Consolas', monospace; -fx-font-size: 14px;" />
-                                
-                                <Label text="Interpolación f(x) =" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                <TextField fx:id="interpolatedValueField" editable="false" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                            </children>
+                        <GridPane hgap="10" vgap="10" alignment="CENTER_LEFT">
+                            <Label text="Polinomio P(x) =" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <TextField fx:id="polynomialOutputField" editable="false" prefWidth="380.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            
+                            <Label text="Interpolación f(x) =" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <TextField fx:id="interpolatedValueField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         </GridPane>
                     </children>
                 </VBox>
             </children>
         </HBox>
         
-        <Button fx:id="secondaryButton" text="Volver al Menú" onAction="#switchToMenu" styleClass="button" />
+        <Button text="Volver" onAction="#switchToMenu" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
