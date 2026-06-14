@@ -44,3 +44,36 @@
     -fx-border-color: #90caf9; /* El borde brilla en azul claro cuando el usuario da clic */
     -fx-effect: dropshadow(gaussian, #90caf9, 4, 0.3, 0, 0);
 }
+
+.table-view {
+    -fx-background-color: #1f2933;
+    -fx-border-color: #1565c0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+.table-view .column-header-background {
+    -fx-background-color: #283593;
+}
+.table-view .column-header {
+    -fx-background-color: #283593;
+    -fx-border-color: transparent #1565c0 transparent transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #90caf9;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: none;
+}
+.table-view .table-row-cell {
+    -fx-background-color: #1f2933;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent transparent #283e51 transparent;
+}
+.table-view .table-row-cell:odd {
+    -fx-background-color: #18222b;
+    -fx-text-fill: #ffffff;
+}
+
+.table-view .table-row-cell .table-cell {
+    -fx-text-fill: #ffffff;
+}
