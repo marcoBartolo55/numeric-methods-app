@@ -53,4 +53,14 @@ public class menuRootsEquationsController {
         App.setRoot("roots-polynomials");
     }
 
+    @FXML
+	private void switchToColumnPivoting() throws IOException {
+		App.setRoot("column-pivot");
+	}
+
+	@FXML
+	private void switchToLUFactorization() throws IOException {
+		App.setRoot("lu-factorization");
+	}
+
 }

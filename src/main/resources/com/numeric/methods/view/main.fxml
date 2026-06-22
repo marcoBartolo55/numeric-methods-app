@@ -12,12 +12,12 @@
    <children>
       <Label text="Menú Principal - Opciones" />
       <GridPane hgap="120" vgap="20" alignment="CENTER">
-         <Button fx:id="rootsAproximationButton" text="Raíces de Ecuaciones y Aproximación" onAction="#switchToRootsAproximationMenu" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-         <Button fx:id="numericalDifferentiationIntegrationButton" text="Diferenciación e Interpolación" onAction="#switchToNumericalDifferentiationIntegration" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-         <Button fx:id="ordinaryDifferentialEquationsButton" text="Ecuaciones Diferenciales e Integración" onAction="#switchToOrdinaryDifferentialEquations" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+         <Button fx:id="rootsAproximationButton" text="Solución de Ecuaciones y Sistemas Lineales" onAction="#switchToRootsAproximationMenu" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity" />
+         <Button fx:id="numericalDifferentiationIntegrationButton" text="Aproximación e Interpolación de Funciones" onAction="#switchToNumericalDifferentiationIntegration" GridPane.columnIndex="0" GridPane.rowIndex="1" maxWidth="Infinity" />
+         <Button fx:id="ordinaryDifferentialEquationsButton" text="Cálculo Numérico (Diferenciación, Integración y EDOs)" onAction="#switchToOrdinaryDifferentialEquations" GridPane.columnIndex="0" GridPane.rowIndex="2" maxWidth="Infinity" />
       </GridPane>
    </children>
-      <Button fx:id="exitButton" text="Salir" onAction="#exitApplication"/>
+      <Button fx:id="exitButton" text="Salir" onAction="#exitApplication" maxWidth="Infinity"/>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>

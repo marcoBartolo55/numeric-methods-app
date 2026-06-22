@@ -19,6 +19,8 @@
             <Button fx:id="mullerButton" text="Muller" onAction="#switchToMuller" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="deflationButton" text="Deflación" onAction="#switchToDeflation" GridPane.columnIndex="0" GridPane.rowIndex="3" />
             <Button fx:id="rootsPolynomialsButton" text="Raíces de Polinomios" onAction="#switchToRootsPolynomials" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="columnPivotingButton" text="Pivoteo de Columnas" onAction="#switchToColumnPivoting" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <Button fx:id="luFactorizationButton" text="Factorización LU" onAction="#switchToLUFactorization" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         </GridPane>
         <VBox alignment="CENTER" spacing="40.0">
             <Button fx:id="backButton" text="Volver" onAction="#switchToMain" alignment="CENTER" />
