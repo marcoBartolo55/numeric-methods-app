@@ -31,7 +31,6 @@ public class App extends Application {
             if (App.class.getResource(cssPath) != null) {
                 scene.getStylesheets().add(App.class.getResource(cssPath).toExternalForm());
             } else {
-                // Si no existe, carga el estilo principal por defecto
                 if (App.class.getResource("/com/numeric/methods/style/main.css") != null) {
                     scene.getStylesheets().add(App.class.getResource("/com/numeric/methods/style/main.css").toExternalForm());
                 }

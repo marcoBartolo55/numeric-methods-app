@@ -168,3 +168,55 @@
 .combo-box .list-cell:empty {
     -fx-text-fill: #7b8794;
 }
+
+/* --- ESTILOS COMPLEMENTARIOS PARA TITLED PANE (Generar Función) --- */
+
+.custom-titled-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: #1565c0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+/* Encabezado del panel colapsable */
+.custom-titled-pane > .title {
+    -fx-background-color: linear-gradient(to right, #1f2933, #283593);
+    -fx-background-radius: 8px 8px 0px 0px;
+    -fx-border-radius: 8px 8px 0px 0px;
+    -fx-padding: 10px;
+}
+
+/* Texto del encabezado */
+.custom-titled-pane > .title > .text {
+    -fx-fill: #90caf9;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* La pequeña flecha indicadora */
+.custom-titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: #90caf9;
+}
+
+/* Contenido interno cuando está expandido */
+.custom-titled-pane > .content {
+    -fx-background-color: #18222b;
+    -fx-background-radius: 0px 0px 8px 8px;
+    -fx-border-radius: 0px 0px 8px 8px;
+    -fx-border-color: transparent;
+    -fx-padding: 15px;
+}
+
+/* Clases de utilidad para botones específicos de acción */
+.primary-button {
+    -fx-background-color: linear-gradient(to right, #1e88e5, #1565c0);
+}
+
+.clear-button {
+    -fx-background-color: linear-gradient(to right, #37474f, #263238);
+    -fx-border-color: #546e7a;
+}
+.clear-button:hover {
+    -fx-background-color: linear-gradient(to right, #263238, #37474f);
+    -fx-border-color: #b0bec5;
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox alignment="TOP_CENTER" spacing="15.0" prefHeight="650.0" prefWidth="900.0" stylesheets="@column_pivot.css" styleClass="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.columnPivotController">
+    <children>
+        <Label text="Resolución de Sistemas: Pivoteo Parcial y Escalado" style="-fx-font-size: 20px; -fx-font-weight: bold;" styleClass="label" />
+        
+        <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS" styleClass="custom-split-pane">
+            <items>
+                <ScrollPane fitToWidth="true" styleClass="custom-scroll-pane">
+                    <content>
+                        <VBox spacing="15.0" style="-fx-background-color: transparent;">
+                            <padding>
+                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                            </padding>
+                            <children>
+                                <Label text="Configuración del Sistema" style="-fx-font-weight: bold; -fx-font-size: 14px;" styleClass="label" />
+                                
+                                <GridPane hgap="10" vgap="10">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <children>
+                                        <Label text="Dimensión (n):" styleClass="label" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                        <Spinner fx:id="matrixSizeSpinner" min="2" max="10" initialValue="3" editable="true" styleClass="custom-spinner" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                        
+                                        <Label text="Método de Pivoteo:" styleClass="label" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <ComboBox fx:id="methodComboBox" promptText="Seleccione..." maxWidth="Infinity" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Pivoteo Parcial" />
+                                                    <String fx:value="Pivoteo Parcial Escalado" />
+                                                </FXCollections>
+                                            </items>
+                                        </ComboBox>
+                                        
+                                        <Label text="Decimales:" styleClass="label" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                        <Spinner fx:id="decimalsSpinner" min="2" max="8" initialValue="4" styleClass="custom-spinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    </children>
+                                </GridPane>
+                                
+                                <Separator styleClass="custom-separator" />
+                                
+                                <Label text="Matriz de Coeficientes [A] | [b]" style="-fx-font-weight: bold;" styleClass="label" />
+                                <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="200.0" styleClass="matrix-scroll-pane">
+                                    <content>
+                                        <GridPane fx:id="matrixGridPane" hgap="5" vgap="5" alignment="CENTER" style="-fx-background-color: transparent;">
+                                            </GridPane>
+                                    </content>
+                                </ScrollPane>
+                                
+                                <Separator styleClass="custom-separator" />
+                                
+                                <HBox spacing="10.0" alignment="CENTER">
+                                    <children>
+                                        <!--<Button fx:id="stepButton" text="Paso a Paso" onAction="#handleNextStep" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="clear-button" />
+                                        <Button fx:id="calculateButton" text="Resolver Todo" onAction="#handleCalculateAll" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="button, primary-button" />-->
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+                
+                <VBox spacing="15.0" styleClass="right-panel-vbox">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                    <children>
+                        <Label text="Bitácora de Operaciones y Pivoteo" style="-fx-font-weight: bold; -fx-font-size: 14px;" styleClass="label" />
+                        
+                        <TextArea fx:id="logTextArea" editable="false" VBox.vgrow="ALWAYS" wrapText="true" styleClass="custom-text-area" promptText="Aquí se mostrará el rastro estadístico del pivoteo..." />
+                        
+                        <Label text="Resultados del Sistema (Variables X)" style="-fx-font-weight: bold; -fx-font-size: 14px;" styleClass="label" />
+                        
+                        <TableView fx:id="resultsTable" prefHeight="180.0" styleClass="table-view">
+                            <columns>
+                                <TableColumn fx:id="variableColumn" text="Variable" prefWidth="200.0" />
+                                <TableColumn fx:id="valueColumn" text="Valor Asignado" prefWidth="300.0" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+            </items>
+        </SplitPane>
+        
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <Button fx:id="secondaryButton" text="Volver al Menú" onAction="#switchToMenu" styleClass="clear-button" style="-fx-padding: 6 20 6 20; -fx-font-size: 14px;" />
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+</VBox>

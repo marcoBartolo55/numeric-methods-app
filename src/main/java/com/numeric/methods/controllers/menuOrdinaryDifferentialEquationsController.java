@@ -68,5 +68,20 @@ public class menuOrdinaryDifferentialEquationsController {
 		App.setRoot("runge-kutta-4");
 	}
 
+	@FXML
+	private void switchToRungeKuttaFehlberg() throws IOException {
+		App.setRoot("runge-kutta-fehlberg");
+	}
+
+	@FXML
+	private void switchToColumnPivoting() throws IOException {
+		App.setRoot("column-pivot");
+	}
+
+	@FXML
+	private void switchToLUFactorization() throws IOException {
+		App.setRoot("lu-factorization");
+	}
+
 }
 

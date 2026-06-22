@@ -23,8 +23,6 @@
             <Button fx:id="rungeKutta3Button" text="Runge Kutta 3" onAction="#switchToRungeKutta3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button fx:id="rungeKutta4Button" text="Runge Kutta 4" onAction="#switchToRungeKutta4" GridPane.columnIndex="0" GridPane.rowIndex="5" />
             <Button fx:id="rungeKuttaFehlbergButton" text="Runge Kutta Fehlberg" onAction="#switchToRungeKuttaFehlberg" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="columnPivotingButton" text="Pivoteo de Columnas" onAction="#switchToColumnPivoting" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-            <Button fx:id="luFactorizationButton" text="Factorización LU" onAction="#switchToLUFactorization" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         </GridPane>
         
         <VBox alignment="CENTER" spacing="40.0">

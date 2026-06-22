@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--TODO AGREGAR DENTRO DE LA INTERFAZ LA CAPACIDAD DE PODER INGRESAR UNA FUNCIÓN PARA HACER CALCULO-->
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
@@ -32,17 +31,50 @@
                                         <FXCollections fx:factory="observableArrayList">
                                             <String fx:value="Lineal" />
                                             <String fx:value="Cuadrático" />
+                                            <String fx:value="Cúbico" />
+                                            <String fx:value="4to Grado" />
+                                            <String fx:value="5to Grado" />
+                                            <String fx:value="6to Grado" />
                                         </FXCollections>
                                     </items>
                                 </ComboBox>
                             </children>
                         </GridPane>
                         
+                        <TitledPane text="Generar Puntos mediante Función" expanded="false" styleClass="custom-titled-pane">
+                            <content>
+                                <VBox spacing="10.0">
+                                    <children>
+                                        <Label text="Función f(x):" styleClass="body-label" />
+                                        <TextField fx:id="functionField" promptText="Ej: x^2 - 3*x + 2" styleClass="custom-text-field" />
+                                        
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                                                    <children>
+                                                        <Label text="X Min:" styleClass="body-label" />
+                                                        <TextField fx:id="xMinField" promptText="0" styleClass="custom-text-field" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                                                    <children>
+                                                        <Label text="X Max:" styleClass="body-label" />
+                                                        <TextField fx:id="xMaxField" promptText="10" styleClass="custom-text-field" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <!--<Button text="Evaluar f(x) en Tabla" onAction="#generatePointsFromFunction" maxWidth="Infinity" styleClass="action-button" />-->
+                                    </children>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        
                         <HBox spacing="10.0" alignment="CENTER">
                             <children>
-                                <!-- <Button text="Generar Puntos" onAction="#generatePoints" />
-                                <Button text="Calcular" onAction="#calculateRegression" />
-                                <Button text="Limpiar" onAction="#clearData" /> -->
+                                <!--<Button text="Generar Tabla" onAction="#generatePoints" styleClass="action-button" />
+                                <Button text="Calcular" onAction="#calculateRegression" styleClass="primary-button" />
+                                <Button text="Limpiar" onAction="#clearData" styleClass="clear-button" />-->
                             </children>
                         </HBox>
                         
@@ -70,7 +102,6 @@
                 
                 <VBox spacing="10.0" alignment="CENTER" HBox.hgrow="ALWAYS">
                     <children>
-                        <!-- Tabla de datos (única) -->
                         <TableView fx:id="dataTable" prefHeight="250.0" prefWidth="450.0">
                             <columns>
                                 <TableColumn fx:id="pointNumberCol" text="Punto (i)" prefWidth="80.0" />
@@ -79,7 +110,6 @@
                             </columns>
                         </TableView>
                         
-                        <!-- Gráfico -->
                         <ScatterChart fx:id="leastSquaresChart" title="Visualización de Puntos" prefHeight="300.0" prefWidth="450.0">
                             <xAxis>
                                 <NumberAxis side="BOTTOM" fx:id="xAxis" label="Eje X" />
