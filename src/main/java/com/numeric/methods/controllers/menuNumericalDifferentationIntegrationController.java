@@ -47,4 +47,9 @@ public class menuNumericalDifferentationIntegrationController {
 	private void switchToDividedDifferences() throws IOException {
 		App.setRoot("divided-differences");
 	}
+
+	@FXML
+	private void switchToLagrangeInterpolation() throws IOException {
+		App.setRoot("lagrange-interpolation");
+	}
 }
