@@ -7,7 +7,11 @@ public class AdaptiveSimpson {
     private final Expression expression;
 
     public AdaptiveSimpson(String functionStr) {
-        this.expression = new ExpressionBuilder(functionStr).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(functionStr).variable("x").build();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Función inválida: " + functionStr);
+        }
     }
 
     public double evaluateFunction(double x) {

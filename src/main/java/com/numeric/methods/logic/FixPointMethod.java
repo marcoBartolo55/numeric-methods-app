@@ -16,7 +16,11 @@ public class FixPointMethod {
         this.x0 = x0;
         this.maxIterations = maxIterations;
         this.maxError = maxError;
-        this.expression = new ExpressionBuilder(funcion).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(funcion).variable("x").build();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Función inválida: " + funcion);
+        }
     }
 
     public double evaluateFunction(double x) {

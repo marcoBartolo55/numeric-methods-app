@@ -17,7 +17,11 @@ public class BisectionMethod {
         this.b = b;
         this.maxIterations = maxIterations;
         this.tolerance = tolerance;
-        this.expression = new ExpressionBuilder(function).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variable("x").build();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Función inválida: " + function);
+        }
     }
 
     public double evaluateFunction(double x) {

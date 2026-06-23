@@ -7,12 +7,12 @@ import java.util.List;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Derivative3Points {
+public class Derivative5Points {
     private double x0, h;
     private Expression expression;
     private List<Point> points;
 
-    public Derivative3Points(String function, double x0, double h) {
+    public Derivative5Points(String function, double x0, double h) {
         this.x0 = x0;
         this.h = h;
         try {
@@ -22,7 +22,7 @@ public class Derivative3Points {
         }
     }
 
-    public Derivative3Points(List<Point> points) {
+    public Derivative5Points(List<Point> points) {
         this.points = points;
     }
 
@@ -47,7 +47,7 @@ public class Derivative3Points {
     public List<ResultRow> generateTableData() {
         List<ResultRow> dataList = new ArrayList<>();
         
-        if (points == null || points.size() < 3) {
+        if (points == null || points.size() < 5) {
             return dataList;
         }
 

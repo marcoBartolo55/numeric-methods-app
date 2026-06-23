@@ -149,8 +149,11 @@ public class derivative2PointsController {
                 values[i] = Double.parseDouble(coords[i].trim());
             } catch (NumberFormatException e) {
                 showErrorAlert("Valor inválido: '" + coords[i] + "'. Ingrese solo números.");
-                return null;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                showErrorAlert("Ocurrió un error inesperado al procesar las coordenadas: " + ex.getMessage());
             }
+            
         }
         
         List<Derivative2Points.Point> points = new ArrayList<>();

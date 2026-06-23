@@ -105,8 +105,10 @@ public class bisectionController {
         } catch (NumberFormatException ex) {
             showErrorAlert("Por favor, introduce valores numéricos coherentes.");
         } catch (IllegalArgumentException ex) {
-            
             showErrorAlert(ex.getMessage());
+        } catch  (Exception ex) {
+            ex.printStackTrace();
+            showErrorAlert("Ocurrió un error inesperado: " + ex.getMessage());
         }
     }
 

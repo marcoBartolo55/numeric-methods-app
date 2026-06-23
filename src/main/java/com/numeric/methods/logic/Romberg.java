@@ -7,7 +7,12 @@ public class Romberg {
     private final Expression function;
 
     public Romberg(String functionStr) {
-        this.function = new ExpressionBuilder(functionStr).variable("x").build();
+        try {
+            this.function = new ExpressionBuilder(functionStr).variable("x").build();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("La función proporcionada no es válida: " + e.getMessage());
+        }
+        
     }
 
     private double f(double x) {

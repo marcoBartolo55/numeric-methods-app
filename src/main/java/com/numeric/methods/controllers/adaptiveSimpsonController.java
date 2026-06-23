@@ -47,9 +47,9 @@ public class adaptiveSimpsonController {
             resultField.setText(String.format("%.8f", result));
             
         } catch (NumberFormatException e) {
-            resultField.setText("Error: Verifica los campos numéricos.");
+            showErrorAlert("Por favor, ingresa valores numéricos válidos para los límites y la tolerancia.");
         } catch (Exception e) {
-            resultField.setText("Error: " + e.getMessage());
+            showErrorAlert("Ocurrió un error al calcular la integral: " + e.getMessage());
         }
     }
     

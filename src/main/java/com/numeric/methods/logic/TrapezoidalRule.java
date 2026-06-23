@@ -11,14 +11,22 @@ public class TrapezoidalRule {
     public TrapezoidalRule(String function, double a, double b) {
         this.a = a;
         this.b = b;
-        this.expression = new ExpressionBuilder(function).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variable("x").build();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("La función proporcionada no es válida: " + e.getMessage());
+        }
     }
 
     public TrapezoidalRule(String function, int n, double a, double b) {
         this.n = n;
         this.a = a;
         this.b = b;
-        this.expression = new ExpressionBuilder(function).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variable("x").build();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("La función proporcionada no es válida: " + e.getMessage());
+        }
     }
 
     public double evaluateFunction(double x) {

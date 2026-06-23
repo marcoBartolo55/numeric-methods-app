@@ -17,7 +17,11 @@ public class Euler {
         this.y0Initial = y0;
         this.xf = xf;
         this.h = h;
-        this.expression = new ExpressionBuilder(function).variables("x", "y").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variables("x", "y").build();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Función inválida: " + function);
+        }
     }
 
     public double evaluateFunction(double x, double y) {

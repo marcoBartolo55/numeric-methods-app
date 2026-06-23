@@ -14,7 +14,12 @@ public class MultipleSimpson {
         this.a = a;
         this.b = b;
         this.n = n;
-        this.expression = new ExpressionBuilder(function).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variable("x").build();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("La función proporcionada no es válida: " + e.getMessage());
+        }
+        
     }
 
     public double evaluateFunction(double x) {

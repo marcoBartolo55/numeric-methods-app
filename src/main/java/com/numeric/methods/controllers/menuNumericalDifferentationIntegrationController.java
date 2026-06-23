@@ -39,6 +39,11 @@ public class menuNumericalDifferentationIntegrationController {
 	}
 
 	@FXML
+	private void switchToDerivative5Points() throws IOException {
+		App.setRoot("derivative-5-points");
+	}
+
+	@FXML
 	private void switchToNevilleInterpolation() throws IOException {
 		App.setRoot("neville-interpolation");
 	}

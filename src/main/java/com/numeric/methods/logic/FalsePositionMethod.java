@@ -17,7 +17,11 @@ public class FalsePositionMethod {
         this.x1 = x1;
         this.maxIterations = maxIterations;
         this.maxError = maxError;
-        this.expression = new ExpressionBuilder(function).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variable("x").build();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Función inválida: " + function);
+        }
     }
 
     public double evaluateFunction(double x) {

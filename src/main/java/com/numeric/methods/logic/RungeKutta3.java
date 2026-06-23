@@ -17,7 +17,11 @@ public class RungeKutta3 {
         this.y0Initial = y0;
         this.xf = xf;
         this.h = h;
-        this.expression = new ExpressionBuilder(function).variables("x", "y").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variables("x", "y").build();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("La función proporcionada no es válida: " + e.getMessage());
+        }
     }
 
     public double evaluateFunction(double x, double y) {

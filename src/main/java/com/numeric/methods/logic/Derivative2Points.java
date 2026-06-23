@@ -13,7 +13,11 @@ public class Derivative2Points {
     public Derivative2Points(String function, double x0, double h) {
         this.x0 = x0;
         this.h = h;
-        this.expression = new ExpressionBuilder(function).variable("x").build();
+        try {
+            this.expression = new ExpressionBuilder(function).variable("x").build();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Función inválida: " + function);
+        }
     }
 
     public Derivative2Points(List<Point> points) {

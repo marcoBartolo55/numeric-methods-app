@@ -10,7 +10,11 @@ public class TaylorPolynomial {
     private final double a;
 
     public TaylorPolynomial(String functionStr, double a) {
-        this.function = new ExpressionBuilder(functionStr).variable("x").build();
+        try {
+            this.function = new ExpressionBuilder(functionStr).variable("x").build();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("La función proporcionada no es válida: " + e.getMessage());
+        }
         this.a = a;
     }
 

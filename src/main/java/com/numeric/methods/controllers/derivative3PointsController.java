@@ -150,6 +150,9 @@ public class derivative3PointsController {
             } catch (NumberFormatException e) {
                 showErrorAlert("Valor inválido: '" + coords[i] + "'. Ingrese solo números.");
                 return null;
+            } catch (Exception e) {
+                showErrorAlert("Ocurrió un error al procesar las coordenadas: " + e.getMessage());
+                return null;
             }
         }
         

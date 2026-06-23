@@ -15,9 +15,10 @@
             <Button fx:id="leastSquaresButton" text="Mínimos Cuadrados" onAction="#switchToLeastSquares" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Button fx:id="derivative2PointsButton" text="Derivación 2 puntos" onAction="#switchToDerivative2Points" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Button fx:id="derivative3PointsButton" text="Derivación 3 puntos" onAction="#switchToDerivative3Points" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="nevilleInterpolationButton" text="Interpolación de Neville" onAction="#switchToNevilleInterpolation" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Button fx:id="dividedDifferencesButton" text="Diferencias Divididas" onAction="#switchToDividedDifferences" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="lagrangeInterpolation" text="Interpolación de Lagrange" onAction="#switchToLagrangeInterpolation" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Button fx:id="derivative5PointsButton" text="Derivación 5 puntos" onAction="#switchToDerivative5Points" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Button fx:id="nevilleInterpolationButton" text="Interpolación de Neville" onAction="#switchToNevilleInterpolation" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="dividedDifferencesButton" text="Diferencias Divididas" onAction="#switchToDividedDifferences" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Button fx:id="lagrangeInterpolation" text="Interpolación de Lagrange" onAction="#switchToLagrangeInterpolation" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
         </GridPane>
         <VBox alignment="CENTER" spacing="40.0">
