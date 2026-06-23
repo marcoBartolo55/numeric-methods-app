@@ -17,9 +17,8 @@ public class MultipleSimpson {
         try {
             this.expression = new ExpressionBuilder(function).variable("x").build();
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("La función proporcionada no es válida: " + e.getMessage());
+            throw new IllegalArgumentException("Función no válida: " + e.getMessage());
         }
-        
     }
 
     public double evaluateFunction(double x) {
@@ -28,60 +27,48 @@ public class MultipleSimpson {
     }
 
     public double calculateStep() {
-        double h = (b - a) / n;
-        return h;
+        return (b - a) / n;
     }
 
-    public double calculateIntegral() {
+    public double calculateIntegral13() {
         double h = calculateStep();
-        double sumEven = 0.0;
-        double sumOdd = 0.0;
-
+        double sumEven = 0.0, sumOdd = 0.0;
         for (int i = 1; i < n; i++) {
             double x_i = a + i * h;
-            if (i % 2 == 0) {
-                sumEven += evaluateFunction(x_i);
-            } else {
-                sumOdd += evaluateFunction(x_i);
-            }
+            if (i % 2 == 0) sumEven += evaluateFunction(x_i);
+            else sumOdd += evaluateFunction(x_i);
         }
-
         return (h / 3.0) * (evaluateFunction(a) + 4.0 * sumOdd + 2.0 * sumEven + evaluateFunction(b));
     }
 
-    public List<ResultRow> generateTableData() {
-        List<ResultRow> dataList = new ArrayList<>();
+    public double calculateIntegral38() {
         double h = calculateStep();
-        
-        
-        double fa = evaluateFunction(a);
-        dataList.add(new ResultRow(0, a, fa, 1, fa * 1.0));
-
-        
+        double sum = 0.0;
         for (int i = 1; i < n; i++) {
             double x_i = a + i * h;
-            double fx_i = evaluateFunction(x_i);
-            
-            int weight = (i % 2 == 0) ? 2 : 4; 
-            double contribution = fx_i * weight;
-            
-            dataList.add(new ResultRow(i, x_i, fx_i, weight, contribution));
+            int weight = (i % 3 == 0) ? 2 : 3;
+            sum += weight * evaluateFunction(x_i);
         }
-
-        
-        double fb = evaluateFunction(b);
-        dataList.add(new ResultRow(n, b, fb, 1, fb * 1.0));
-
-        return dataList;
+        return (3.0 * h / 8.0) * (evaluateFunction(a) + sum + evaluateFunction(b));
     }
 
-    
+    public List<ResultRow> generateTableData(boolean is38) {
+        List<ResultRow> data = new ArrayList<>();
+        double h = calculateStep();
+        data.add(new ResultRow(0, a, evaluateFunction(a), 1, evaluateFunction(a)));
+        for (int i = 1; i < n; i++) {
+            double x_i = a + i * h;
+            int weight = is38 ? ((i % 3 == 0) ? 2 : 3) : ((i % 2 == 0) ? 2 : 4);
+            data.add(new ResultRow(i, x_i, evaluateFunction(x_i), weight, evaluateFunction(x_i) * weight));
+        }
+        data.add(new ResultRow(n, b, evaluateFunction(b), 1, evaluateFunction(b)));
+        return data;
+    }
+
     public static class ResultRow {
         private final int iteration;
-        private final double xi;
-        private final double fxi;
+        private final double xi, fxi, contribution;
         private final int weight;
-        private final double contribution;
 
         public ResultRow(int iteration, double xi, double fxi, int weight, double contribution) {
             this.iteration = iteration;
@@ -91,24 +78,10 @@ public class MultipleSimpson {
             this.contribution = contribution;
         }
 
-        public int getIteration() {
-            return iteration;
-        }
-
-        public double getXi() {
-            return xi;
-        }
-
-        public double getFxi() {
-            return fxi;
-        }
-
-        public int getWeight() {
-            return weight; 
-        }
-
-        public double getContribution() {
-            return contribution; 
-        }
+        public int getIteration() { return iteration; }
+        public double getXi() { return xi; }
+        public double getFxi() { return fxi; }
+        public int getWeight() { return weight; }
+        public double getContribution() { return contribution; }
     }
 }

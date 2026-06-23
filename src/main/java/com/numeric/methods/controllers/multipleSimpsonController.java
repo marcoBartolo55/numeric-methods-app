@@ -1,120 +1,67 @@
 package com.numeric.methods.controllers;
 
-import java.io.IOException;
-import java.util.List;
 import com.numeric.methods.App;
 import com.numeric.methods.logic.MultipleSimpson;
-
-import javafx.scene.control.TextField;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import java.io.IOException;
 
 public class multipleSimpsonController {
 
-    // Componentes de la vista inyectados por FXML
-    @FXML private TextField functionField;
-    @FXML private TextField initialPointField; // Límite inferior (a)
-    @FXML private TextField finalPointField;   // Límite superior (b)
-    @FXML private TextField segmentsField;     // Número de subintervalos (n)
-    @FXML private TextField resultField;
-    
+    @FXML private TextField functionField, initialPointField, finalPointField, segmentsField, resultField;
+    @FXML private ComboBox<String> methodSelector;
     @FXML private TableView<MultipleSimpson.ResultRow> resultsTable;
-    @FXML private TableColumn<MultipleSimpson.ResultRow, Integer> iterationColumn;
-    @FXML private TableColumn<MultipleSimpson.ResultRow, Double> xiColumn;
-    @FXML private TableColumn<MultipleSimpson.ResultRow, Double> fxiColumn;
-    @FXML private TableColumn<MultipleSimpson.ResultRow, Integer> weightColumn;
-    @FXML private TableColumn<MultipleSimpson.ResultRow, Double> contributionColumn;
+    @FXML private TableColumn<MultipleSimpson.ResultRow, Integer> iterationColumn, weightColumn;
+    @FXML private TableColumn<MultipleSimpson.ResultRow, Double> xiColumn, fxiColumn, contributionColumn;
 
     private final ObservableList<MultipleSimpson.ResultRow> tableData = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        iterationColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getIteration()));
-        xiColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getXi()));
-        fxiColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getFxi()));
-        weightColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getWeight()));
-        contributionColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getContribution()));
+        methodSelector.getItems().addAll("Simpson 1/3", "Simpson 3/8");
+        methodSelector.setValue("Simpson 1/3");
+        iterationColumn.setCellValueFactory(d -> new javafx.beans.property.SimpleObjectProperty<>(d.getValue().getIteration()));
+        xiColumn.setCellValueFactory(d -> new javafx.beans.property.SimpleObjectProperty<>(d.getValue().getXi()));
+        fxiColumn.setCellValueFactory(d -> new javafx.beans.property.SimpleObjectProperty<>(d.getValue().getFxi()));
+        weightColumn.setCellValueFactory(d -> new javafx.beans.property.SimpleObjectProperty<>(d.getValue().getWeight()));
+        contributionColumn.setCellValueFactory(d -> new javafx.beans.property.SimpleObjectProperty<>(d.getValue().getContribution()));
         resultsTable.setItems(tableData);
     }
 
     @FXML
     private void calculateMultipleSimpson() {
-        tableData.clear();
-        if (resultField != null) resultField.clear();
-
-        String function = functionField.getText().trim();
-        String initialP = initialPointField.getText().trim();
-        String finalP = finalPointField.getText().trim();
-        String segments = segmentsField.getText().trim();
-
-        if (function.isEmpty() || initialP.isEmpty() || finalP.isEmpty() || segments.isEmpty()) {
-            showErrorAlert("Por favor, complete todos los campos.");
-            return;
-        }
-
         try {
-            double a = Double.parseDouble(initialP); // Límite inferior
-            double b = Double.parseDouble(finalP);   // Límite superior
-            int n = Integer.parseInt(segments);
+            double a = Double.parseDouble(initialPointField.getText());
+            double b = Double.parseDouble(finalPointField.getText());
+            int n = Integer.parseInt(segmentsField.getText());
+            boolean is38 = methodSelector.getValue().equals("Simpson 3/8");
 
-            if (a == b) {
-                showErrorAlert("El límite inferior y el límite superior no pueden ser iguales.");
+            if (is38 && n % 3 != 0) {
+                showErrorAlert("Para Simpson 3/8, el número de segmentos debe ser múltiplo de 3.");
+                return;
+            } else if (!is38 && n % 2 != 0) {
+                showErrorAlert("Para Simpson 1/3, el número de segmentos debe ser par.");
                 return;
             }
 
-            if (a > b) {
-                showErrorAlert("El límite inferior debe ser menor que el límite superior.");
-                return;
-            }
-
-            if (n % 2 != 0) {
-                showErrorAlert("El número de subintervalos (n) debe ser estrictamente un número par.");
-                return;
-            }
-
-            MultipleSimpson multipleSimpson = new MultipleSimpson(function, a, b, n);
+            MultipleSimpson solver = new MultipleSimpson(functionField.getText(), a, b, n);
+            double res = is38 ? solver.calculateIntegral38() : solver.calculateIntegral13();
             
-            double integralValue = multipleSimpson.calculateIntegral();
-            if (resultField != null) {
-                resultField.setText(String.format("%.6f", integralValue));
-            }
+            resultField.setText(String.format("%.6f", res));
+            tableData.setAll(solver.generateTableData(is38));
 
-            List<MultipleSimpson.ResultRow> results = multipleSimpson.generateTableData();
-            tableData.addAll(results);
-
-            showInfoAlert("Cálculo completado exitosamente.");
-        
-        } catch (NumberFormatException e) {
-            showErrorAlert("Por favor, ingrese valores numéricos válidos (límites reales y segmentos enteros).");
+        } catch (Exception e) {
+            showErrorAlert("Error en los datos de entrada.");
         }
     }
-    
+
     @FXML
-    private void switchToMenu() throws IOException {
-        
-        App.setRoot("menu-ordinary-differential-equations"); 
-    }
+    private void switchToMenu() throws IOException { App.setRoot("menu-ordinary-differential-equations"); }
 
-    private void showErrorAlert(String message) {
-        javafx.application.Platform.runLater(() -> {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-            alert.setTitle("Error de entrada");
-            alert.setHeaderText("Entrada no válida");
-            alert.setContentText(message);
-            alert.showAndWait();
-        });
-    }
-
-    private void showInfoAlert(String message) {
-        javafx.application.Platform.runLater(() -> {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-            alert.setTitle("Resultado");
-            alert.setHeaderText("Cálculo completado");
-            alert.setContentText(message);
-            alert.showAndWait();
-        });
+    private void showErrorAlert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, msg);
+        alert.showAndWait();
     }
 }

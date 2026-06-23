@@ -2,92 +2,61 @@ package com.numeric.methods.logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
+import org.apache.commons.math3.complex.Complex;
 
 public class FixPointMethod {
     private final int maxIterations;
     private final double maxError;
-    private double x0;
-    private final Expression expression;
+    private Complex x0;
     private String exitReason = "Se alcanzó el límite máximo de iteraciones.";
 
-    public FixPointMethod(double x0, int maxIterations, double maxError, String funcion) {
+    public FixPointMethod(Complex x0, int maxIterations, double maxError) {
         this.x0 = x0;
         this.maxIterations = maxIterations;
         this.maxError = maxError;
-        try {
-            this.expression = new ExpressionBuilder(funcion).variable("x").build();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Función inválida: " + funcion);
-        }
     }
 
-    public double evaluateFunction(double x) {
-        expression.setVariable("x", x);
-        return expression.evaluate();
+    // Aquí definirías tu función g(x) manualmente con lógica compleja
+    public Complex evaluateFunction(Complex x) {
+        // Ejemplo: g(x) = x^2 + 1
+        return x.multiply(x).add(Complex.ONE);
     }
-
-        public void calculateNextX() {
-            x0 = evaluateFunction(x0);
-        }
-
-    public String getExitReason() {
-        return exitReason;
-    }
-    
-    /**
-     * @param useTolerance true si el criterio de paro es por tolerancia, false si es por iteraciones fijas.
-     */
 
     public List<ResultRow> generateResults(boolean useTolerance) {
         List<ResultRow> results = new ArrayList<>();
-        exitReason = "Se alcanzó el límite máximo de iteraciones.";
-        
-        double currentX = x0;  // Usar variable local
+        Complex currentX = x0;
         
         for (int i = 1; i <= maxIterations; i++) {
-            double nextX = evaluateFunction(currentX);
-            double error = Math.abs(nextX - currentX);
+            Complex nextX = evaluateFunction(currentX);
+            double error = nextX.subtract(currentX).abs();
             results.add(new ResultRow(i, currentX, nextX, error));
             
             if (useTolerance && error < maxError) {
-                exitReason = "Se alcanzó la tolerancia deseada.";
+                exitReason = "Se alcanzó la tolerancia.";
                 break;
             }
-            currentX = nextX;  // Actualizar para siguiente iteración
+            currentX = nextX;
         }
         return results;
     }
 
+    public String getExitReason() { return exitReason; }
+
     public static class ResultRow {
         private final Integer iteration;
-        private final Double x0;
-        private final Double gxn;
+        private final Complex x0, gxn;
         private final Double error;
 
-        public ResultRow(Integer iteration, Double x0, Double gxn, Double error) {
+        public ResultRow(Integer iteration, Complex x0, Complex gxn, Double error) {
             this.iteration = iteration;
             this.x0 = x0;
             this.gxn = gxn;
             this.error = error;
         }
 
-        public Integer getIteration() {
-            return iteration;
-        }
-
-        public Double getX0() {
-            return x0;
-        }
-
-        public Double getGxn() {
-            return gxn;
-        }
-
-        public Double getError() {
-            return error;
-        }
+        public Integer getIteration() { return iteration; }
+        public String getX0() { return x0.toString(); }
+        public String getGxn() { return gxn.toString(); }
+        public Double getError() { return error; }
     }
-    
 }

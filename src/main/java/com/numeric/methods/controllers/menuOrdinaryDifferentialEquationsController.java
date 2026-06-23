@@ -34,8 +34,8 @@ public class menuOrdinaryDifferentialEquationsController {
 	}
 
 	@FXML
-	private void switchToMultipleSimpson13() throws IOException {
-		App.setRoot("multiple-simpson-13");
+	private void switchToMultipleSimpson() throws IOException {
+		App.setRoot("multiple-simpson");
 	}
 
 	@FXML
