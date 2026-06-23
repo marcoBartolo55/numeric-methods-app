@@ -57,4 +57,5 @@ public class menuNumericalDifferentationIntegrationController {
 	private void switchToLagrangeInterpolation() throws IOException {
 		App.setRoot("lagrange-interpolation");
 	}
+
 }

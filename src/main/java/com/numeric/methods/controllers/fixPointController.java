@@ -12,7 +12,8 @@ import java.io.IOException;
 
 public class fixPointController {
 
-    @FXML private TextField realField, imagField, iterationsField, errorField;
+    // IDs exactos que coinciden con tu nuevo FXML
+    @FXML private TextField functionField, initialPointField, iterationsField, errorField;
     @FXML private TableView<ResultRow> resultsTable;
     @FXML private TableColumn<ResultRow, Integer> iterationColumn;
     @FXML private TableColumn<ResultRow, String> x0Column, gxnColumn;
@@ -32,15 +33,19 @@ public class fixPointController {
     @FXML
     private void calculateFixPoint() {
         try {
-            double real = Double.parseDouble(realField.getText());
-            double imag = Double.parseDouble(imagField.getText());
+            // Aquí leemos de los campos correctos
+            double initial = Double.parseDouble(initialPointField.getText());
             int iter = iterationsField.getText().isEmpty() ? 100 : Integer.parseInt(iterationsField.getText());
             double err = errorField.getText().isEmpty() ? 0.0 : Double.parseDouble(errorField.getText());
 
-            FixPointMethod method = new FixPointMethod(new Complex(real, imag), iter, err);
+            // Usamos Complex(real, 0) porque el campo inicial es un solo valor
+            FixPointMethod method = new FixPointMethod(new Complex(initial, 0), iter, err);
+            
+            // Nota: Aquí se está ejecutando la lógica hardcodeada en FixPointMethod.java
             tableData.setAll(method.generateResults(!errorField.getText().isEmpty()));
+            
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Datos inválidos").show();
+            new Alert(Alert.AlertType.ERROR, "Error en los datos: " + e.getMessage()).show();
         }
     }
 

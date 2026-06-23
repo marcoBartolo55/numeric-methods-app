@@ -1,173 +1,148 @@
 package com.numeric.methods.controllers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import com.numeric.methods.App;
 import com.numeric.methods.logic.Derivative2Points;
-
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;  
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
+import com.numeric.methods.logic.Derivative2Points.Point;
+import com.numeric.methods.logic.Derivative2Points.DerivativeRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import java.util.ArrayList;
+import java.util.List;
 
 public class derivative2PointsController {
 
-    // Componentes de la vista inyectados por FXML
-    @FXML private ComboBox<String> methodComboBox;
-    @FXML private TextField functionField;
-    @FXML private TextField initialPointField;
-    @FXML private TextField stepSizeField;
-    @FXML private TextField coordinatesField;
-    @FXML private TextField backwardField;
-    @FXML private TextField centralField;
-    @FXML private TextField forwardField;
-    @FXML private TableView<Derivative2Points.ResultRow> resultTable;
-    @FXML private TableColumn<Derivative2Points.ResultRow, Number> pointColumn;
-    @FXML private TableColumn<Derivative2Points.ResultRow, Number> xColumn;
-    @FXML private TableColumn<Derivative2Points.ResultRow, Number> fxColumn;
-    @FXML private TableColumn<Derivative2Points.ResultRow, Number> ffxColumn;
+    // Componentes de la interfaz
+    @FXML private ComboBox<String> spacingComboBox;
+    @FXML private GridPane equalSpacingPane, unequalSpacingPane;
+    @FXML private TextField functionField, initialPointField, stepSizeField, coordinatesField;
+    @FXML private Button calculateButton;
+    
+    // Componentes de la tabla
+    @FXML private TableView<DerivativeRow> resultTable;
+    @FXML private TableColumn<DerivativeRow, String> rowLabelColumn, point1Column, point2Column;
 
-    private final ObservableList<Derivative2Points.ResultRow> tableData = FXCollections.observableArrayList();
+    private final ObservableList<DerivativeRow> tableData = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        methodComboBox.setItems(FXCollections.observableArrayList(
-            "h igualmente espaciado",
-            "h no igualmente espaciado"
-        ));
-        pointColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getIteration()));
-        xColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getXi()));
-        fxColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getYi()));
-        ffxColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getDerivative()));
+        // Configurar columnas de la tabla
+        rowLabelColumn.setCellValueFactory(d -> d.getValue().variableProperty());
+        point1Column.setCellValueFactory(d -> d.getValue().puntoProperty(0));
+        point2Column.setCellValueFactory(d -> d.getValue().puntoProperty(1));
         resultTable.setItems(tableData);
 
-        methodComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-        
-        clearFields();
-        if ("h igualmente espaciado".equals(newValue)) {
-            functionField.setDisable(false);
-            initialPointField.setDisable(false);
-            stepSizeField.setDisable(false);
-            coordinatesField.setDisable(true);
-            coordinatesField.setPromptText("No se requiere para este método");
-        } else if ("h no igualmente espaciado".equals(newValue)) {
-            functionField.setDisable(true);
-            initialPointField.setDisable(true);
-            stepSizeField.setDisable(true);
-            coordinatesField.setDisable(false);
-            coordinatesField.setPromptText("Ej: 1.0, 5.2, 1.4, 7.8");
-        }
+        // Lógica dinámica para mostrar/ocultar paneles según el ComboBox
+        spacingComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            calculateButton.setDisable(false); // Habilitar el botón
+
+            if ("h igualmente espaciada".equals(newValue)) {
+                equalSpacingPane.setVisible(true);
+                equalSpacingPane.setManaged(true);
+                unequalSpacingPane.setVisible(false);
+                unequalSpacingPane.setManaged(false);
+            } else if ("h no igualmente espaciada".equals(newValue)) {
+                unequalSpacingPane.setVisible(true);
+                unequalSpacingPane.setManaged(true);
+                equalSpacingPane.setVisible(false);
+                equalSpacingPane.setManaged(false);
+            }
         });
     }
 
     @FXML
-    private void calculateDerivative2Points() {
+    private void calculateDerivative() { // Ojo: en el FXML lo llamamos calculateDerivative
+        try {
+            String selectedMethod = spacingComboBox.getValue();
+            List<Point> points;
 
-    String selectedMethod = methodComboBox.getSelectionModel().getSelectedItem();
-    String function = functionField.getText().trim();
-    String initialP = initialPointField.getText().trim();
-    String stepSize = stepSizeField.getText().trim();
-    String coordinates = coordinatesField.getText().trim();
-    
-    if (selectedMethod == null) {
-        showErrorAlert("Por favor, seleccione un método de derivación válido.");
+            if ("h igualmente espaciada".equals(selectedMethod)) {
+                // Modo 1: Evaluando f(x)
+                String func = functionField.getText();
+                if (func == null || func.trim().isEmpty()) {
+                    throw new Exception("Ingrese la función f(x).");
+                }
+                
+                double x0 = Double.parseDouble(initialPointField.getText());
+                double h = Double.parseDouble(stepSizeField.getText());
+                
+                if (h == 0) throw new Exception("El tamaño de paso (h) no puede ser cero.");
 
-    } else if (selectedMethod.equals("h igualmente espaciado")) {
+                // Generamos exactamente 2 puntos (x0 y x0+h)
+                points = Derivative2Points.generatePointsEquallySpaced(func, x0, h, 2);
 
-        Derivative2Points derivative = new Derivative2Points(function, Double.parseDouble(initialP), Double.parseDouble(stepSize));
+            } else {
+                // Modo 2: Coordenadas manuales
+                String input = coordinatesField.getText();
+                if (input == null || input.trim().isEmpty()) {
+                    throw new Exception("El campo de coordenadas está vacío.");
+                }
+                
+                points = parseCoordinates(input);
+                if (points.size() != 2) {
+                    throw new Exception("Se requieren exactamente 2 puntos (4 valores: x0, y0, x1, y1).");
+                }
+            }
 
-        double backward = derivative.calculateBackward();
-        double central = derivative.calculateCentral();
-        double forward = derivative.calculateForward();
+            // Dibujar la tabla con los puntos resultantes
+            fillTable(points);
 
-        showInfoAlert(String.format("Resultados para h igualmente espaciado:\nDerivada hacia atrás: %.6f\nDerivada central: %.6f\nDerivada hacia adelante: %.6f", backward, central, forward));
-
-        backwardField.setText(String.format("%.6f", backward));
-        centralField.setText(String.format("%.6f", central));
-        forwardField.setText(String.format("%.6f", forward));
-
-
-    } else if (selectedMethod.equals("h no igualmente espaciado")) {
-
-        Derivative2Points derivative = new Derivative2Points(parseArray(coordinates));
-
-        List<Derivative2Points.ResultRow> results = derivative.generateTableData();
-        tableData.setAll(results);
+        } catch (NumberFormatException e) {
+            showErrorAlert("Ingrese valores numéricos válidos en los campos de Punto Inicial o Tamaño de Paso.");
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
     }
+
+    private void fillTable(List<Point> points) {
+        tableData.clear();
+        DerivativeRow rowX = new DerivativeRow("x", 2);
+        DerivativeRow rowY = new DerivativeRow("f(x)", 2);
+        DerivativeRow rowD = new DerivativeRow("f'(x)", 2);
+
+        // Llenar filas de x y f(x)
+        for (int i = 0; i < points.size(); i++) {
+            rowX.setPunto(i, String.format("%.4f", points.get(i).getX()));
+            rowY.setPunto(i, String.format("%.4f", points.get(i).getY()));
+        }
+
+        // Calcular derivada e insertarla en el segundo punto
+        double der = Derivative2Points.calculateDerivative(points.get(0), points.get(1));
+        rowD.setPunto(1, String.format("%.4f", der));
+
+        tableData.addAll(rowX, rowY, rowD);
     }
 
-    @FXML
-    private void switchToMenu() throws IOException {
-        App.setRoot("menu-numerical-differentiation-integration");
+    private List<Point> parseCoordinates(String input) throws Exception {
+        String[] parts = input.split(",");
+        if (parts.length % 2 != 0) {
+            throw new Exception("El número de coordenadas debe ser par (pares x, y).");
+        }
+
+        List<Point> list = new ArrayList<>();
+        for (int i = 0; i < parts.length; i += 2) {
+            try {
+                list.add(new Point(Double.parseDouble(parts[i].trim()), 
+                                   Double.parseDouble(parts[i+1].trim())));
+            } catch (NumberFormatException e) {
+                throw new Exception("Valor inválido en las coordenadas. Ingrese solo números separados por comas.");
+            }
+        }
+        return list;
     }
 
     private void showErrorAlert(String message) {
-        javafx.application.Platform.runLater(() -> {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-            alert.setTitle("Error de entrada");
-            alert.setHeaderText("Entrada no válida");
-            alert.setContentText(message);
-            alert.showAndWait();
-        });
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error de entrada");
+        alert.setHeaderText("Entrada no válida");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-    private void showInfoAlert(String message) {
-        javafx.application.Platform.runLater(() -> {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-            alert.setTitle("Resultado");
-            alert.setHeaderText("Cálculo completado");
-            alert.setContentText(message);
-            alert.showAndWait();
-        });
-    }
-
-    private List<Derivative2Points.Point> parseArray(String coordinates) {
-        if (coordinates == null || coordinates.trim().isEmpty()) {
-            showErrorAlert("Por favor, ingrese coordenadas en el formato: x0, y0, x1, y1");
-            return null;
-        }
-        
-        String[] coords = coordinates.split(",");
-        
-        if (coords.length < 2) {
-            showErrorAlert("Se requiere al menos una coordenada (x, y)");
-            return null;
-        }
-        if (coords.length % 2 != 0) {
-            showErrorAlert("El número de coordenadas debe ser par (pares x, y). Ingresó " + coords.length + " valores.");
-            return null;
-        }
-        
-        double[] values = new double[coords.length];
-        
-        for (int i = 0; i < coords.length; i++) {
-            try {
-                values[i] = Double.parseDouble(coords[i].trim());
-            } catch (NumberFormatException e) {
-                showErrorAlert("Valor inválido: '" + coords[i] + "'. Ingrese solo números.");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                showErrorAlert("Ocurrió un error inesperado al procesar las coordenadas: " + ex.getMessage());
-            }
-            
-        }
-        
-        List<Derivative2Points.Point> points = new ArrayList<>();
-        for (int i = 0; i < values.length; i += 2) {
-            points.add(new Derivative2Points.Point(values[i], values[i + 1]));
-        }
-        
-        return points;
-    }
-
-    private void clearFields() {
-        backwardField.clear();
-        centralField.clear();
-        forwardField.clear();
-        tableData.clear();
+    @FXML
+    private void switchToMenu() throws Exception { 
+        App.setRoot("menu-numerical-differentiation-integration"); 
     }
 }

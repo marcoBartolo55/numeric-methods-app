@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.gaussianQuadratureController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label text="Integración: Cuadratura Gaussiana" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+
+    <GridPane hgap="15" vgap="15" alignment="CENTER">
+        <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="functionField" promptText="Ej: (3*x^3-15)*e^(...)*cos(9*x-10)" prefWidth="300" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Límite inferior (a):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="aField" promptText="Ej: 0.2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Límite superior (b):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="bField" promptText="Ej: 1.8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Número de puntos (n):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="nField" promptText="Ej: 4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    </GridPane>
+
+    <Button text="Calcular Integral" onAction="#calculateIntegration" style="-fx-font-size: 14px; -fx-padding: 8 20;" />
+
+    <TableView fx:id="resultTable" prefHeight="100" prefWidth="750">
+        <columns>
+            <TableColumn fx:id="functionColumn" text="Función" prefWidth="250" />
+            <TableColumn fx:id="aColumn" text="Límite Inferior (a)" prefWidth="120" />
+            <TableColumn fx:id="bColumn" text="Límite Superior (b)" prefWidth="120" />
+            <TableColumn fx:id="nColumn" text="Puntos (n)" prefWidth="100" />
+            <TableColumn fx:id="resultColumn" text="Resultado Integral" prefWidth="150" />
+        </columns>
+    </TableView>
+
+    <Button text="Volver al Menú" onAction="#switchToMenu" />
+</VBox>

@@ -73,5 +73,10 @@ public class menuOrdinaryDifferentialEquationsController {
 		App.setRoot("runge-kutta-fehlberg");
 	}
 
+	@FXML
+	private void switchToGaussianQuadrature() throws IOException {
+		App.setRoot("gaussian-quadrature");
+	}
+
 }
 

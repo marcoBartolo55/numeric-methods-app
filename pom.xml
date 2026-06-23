@@ -5,11 +5,11 @@
     <artifactId>numeric-methods-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     
-<properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
-</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
     
     <dependencies>
         <dependency>
@@ -40,7 +40,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
-                </plugin>
+            </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -49,7 +49,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.numeric.methods/com.numeric.methods.App</mainClass>
+                            <mainClass>com.numeric.methods.App</mainClass>
                             <modulePath>true</modulePath>
                         </configuration>
                     </execution>

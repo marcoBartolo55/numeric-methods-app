@@ -7,7 +7,7 @@ import org.apache.commons.math3.complex.Complex;
 public class FixPointMethod {
     private final int maxIterations;
     private final double maxError;
-    private Complex x0;
+    private final Complex x0;
     private String exitReason = "Se alcanzó el límite máximo de iteraciones.";
 
     public FixPointMethod(Complex x0, int maxIterations, double maxError) {
@@ -16,9 +16,8 @@ public class FixPointMethod {
         this.maxError = maxError;
     }
 
-    // Aquí definirías tu función g(x) manualmente con lógica compleja
+    // Lógica de g(x) = x^2 + 1 (Ajusta aquí según necesites)
     public Complex evaluateFunction(Complex x) {
-        // Ejemplo: g(x) = x^2 + 1
         return x.multiply(x).add(Complex.ONE);
     }
 
@@ -32,7 +31,7 @@ public class FixPointMethod {
             results.add(new ResultRow(i, currentX, nextX, error));
             
             if (useTolerance && error < maxError) {
-                exitReason = "Se alcanzó la tolerancia.";
+                exitReason = "Se alcanzó la tolerancia: " + maxError;
                 break;
             }
             currentX = nextX;
@@ -44,19 +43,23 @@ public class FixPointMethod {
 
     public static class ResultRow {
         private final Integer iteration;
-        private final Complex x0, gxn;
+        private final String x0, gxn;
         private final Double error;
 
         public ResultRow(Integer iteration, Complex x0, Complex gxn, Double error) {
             this.iteration = iteration;
-            this.x0 = x0;
-            this.gxn = gxn;
+            this.x0 = formatComplex(x0);
+            this.gxn = formatComplex(gxn);
             this.error = error;
         }
 
+        private String formatComplex(Complex c) {
+            return String.format("%.4f + %.4fi", c.getReal(), c.getImaginary());
+        }
+
         public Integer getIteration() { return iteration; }
-        public String getX0() { return x0.toString(); }
-        public String getGxn() { return gxn.toString(); }
+        public String getX0() { return x0; }
+        public String getGxn() { return gxn; }
         public Double getError() { return error; }
     }
 }

@@ -3,62 +3,55 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.derivative2PointsController">
-    <children>
-    <Label text="Derivada de 2 puntos" />
-        <GridPane hgap="10" vgap="10" alignment="CENTER">
-            <!-- Etiquetas y campos de texto -->
-            <Label text="Método:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <ComboBox fx:id="methodComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="Selecciona...">
-                <items>
-                <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="h igualmente espaciado" />
-                        <String fx:value="h no igualmente espaciado" />
-                </FXCollections>
-                </items>
-            </ComboBox>
-
-            <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-            <Label text="Punto inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="initialPointField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-            <Label text="Tamaño del paso (h):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="stepSizeField" promptText="Ej: 0.1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            <Label text="Coordenadas de los puntos (x0, y0, x1, y1):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <TextField fx:id="coordinatesField" promptText="Ej: 1.0, 5.2, 1.4, 7.8" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-            <Label text="Resultados para h igualemente espaciada:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <TextField fx:id="backwardField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="centralField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="forwardField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-
-            <!-- Botón calcular -->
-            <Button fx:id="calculateButton" text="Calcular" onAction="#calculateDerivative2Points" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER" />
-        </GridPane>
-        <!-- Tabla dinámica fuera del GridPane -->
-        <Label text="Resultados para h no igualemente espaciada:" />
-        <TableView fx:id="resultTable" prefHeight="400" prefWidth="800">
-            <columns>
-                <TableColumn fx:id="pointColumn" text="Punto (i)" prefWidth="100" />
-                <TableColumn fx:id="xColumn" text="x_i" prefWidth="100" />
-                <TableColumn fx:id="fxColumn" text="y_i=f(x_i)" prefWidth="100" />
-                <TableColumn fx:id="ffxColumn" text="Pendiente / Derivada Aproximada" prefWidth="100" />
-            </columns>
-        </TableView>
-        
-        <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
-
-    </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
+    <Label text="Derivada de 2 Puntos" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
 
-    
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Tipo de datos:" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="spacingComboBox" promptText="Seleccione el espaciado...">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="h igualmente espaciada" />
+                    <String fx:value="h no igualmente espaciada" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </HBox>
+
+    <Separator />
+
+    <GridPane fx:id="equalSpacingPane" hgap="15" vgap="15" alignment="CENTER" visible="false" managed="false">
+        <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        
+        <Label text="Punto inicial (x0):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="initialPointField" promptText="Ej: 1.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Tamaño de paso (h):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="stepSizeField" promptText="Ej: 0.1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    </GridPane>
+
+    <GridPane fx:id="unequalSpacingPane" hgap="15" vgap="15" alignment="CENTER" visible="false" managed="false">
+        <Label text="Coordenadas (x0, y0, x1, y1):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="coordinatesField" promptText="Ej: 1.0, 5.2, 1.4, 7.8" prefWidth="350" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    </GridPane>
+
+    <Button fx:id="calculateButton" text="Calcular Derivada" onAction="#calculateDerivative" style="-fx-font-size: 14px; -fx-padding: 8 20;" disable="true" />
+
+    <TableView fx:id="resultTable" prefHeight="150" prefWidth="600">
+        <columns>
+            <TableColumn fx:id="rowLabelColumn" text="Variable" prefWidth="120" />
+            <TableColumn fx:id="point1Column" text="Punto 1" prefWidth="200" />
+            <TableColumn fx:id="point2Column" text="Punto 2" prefWidth="200" />
+        </columns>
+    </TableView>
+
+    <Button text="Volver al Menú" onAction="#switchToMenu" />
 </VBox>
