@@ -1,63 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--TODO: Agregar una capa trabajar con numeros imaginarios-->
-
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import java.lang.String?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.mullerController">
+<VBox alignment="CENTER" spacing="20.0" styleClass="main-container" stylesheets="@../styles/muller.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.MullerController">
     <children>
-    <Label text="Método de Muller" />
-        <GridPane hgap="10" vgap="10" alignment="CENTER">
-            <!-- Etiquetas y campos de texto -->
-             <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="functionField" promptText="Ej: x^3-4*x-2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="Método de Muller" styleClass="title-label" style="-fx-font-size: 24px; -fx-text-fill: #60a5fa;"/>
+        
+        <VBox spacing="15.0" alignment="CENTER" maxWidth="500.0" styleClass="form-container">
+            <children>
+                <GridPane hgap="15" vgap="12" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" halignment="RIGHT"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0"/>
+                    </columnConstraints>
+                    <children>
+                        <Label text="Función f(x):" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="body-label" style="-fx-text-fill: #93c5fd; -fx-font-size: 16px;"/>
+                        <TextField fx:id="functionField" promptText="Ej: x^3 - 4*x - 2" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="custom-text-field"/>
+                        
+                        <Label text="P_0:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="body-label" style="-fx-text-fill: #93c5fd; -fx-font-size: 16px;"/>
+                        <TextField fx:id="p0Field" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="custom-text-field"/>
+                        
+                        <Label text="P_1:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="body-label" style="-fx-text-fill: #93c5fd; -fx-font-size: 16px;"/>
+                        <TextField fx:id="p1Field" promptText="Ej: 2" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="custom-text-field"/>
+                        
+                        <Label text="P_2:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="body-label" style="-fx-text-fill: #93c5fd; -fx-font-size: 16px;"/>
+                        <TextField fx:id="p2Field" promptText="Ej: 2" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="custom-text-field"/>
+                        
+                        <Label text="Número de iteraciones:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="body-label" style="-fx-text-fill: #93c5fd; -fx-font-size: 16px;"/>
+                        <TextField fx:id="iterationsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="custom-text-field"/>
+                        
+                        <Label text="Grado de Error:" GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="body-label" style="-fx-text-fill: #93c5fd; -fx-font-size: 16px;"/>
+                        <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="5" styleClass="custom-text-field"/>
+                    </children>
+                </GridPane>
 
-            <Label text="Real" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-
-            <Label text="P_0:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="lowerLimitField" promptText="Ej: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-            <Label text="P_1:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="upperLimitField" promptText="Ej: 2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            <Label text="P_2:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <TextField fx:id="upperLimitField" promptText="Ej: 2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-            <Label text="Número de iteraciones:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <TextField fx:id="iterationsField" promptText="Ej: 10" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-
-            <Label text="Grado de Error:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-            <TextField fx:id="errorField" promptText="Ej: 0.001" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-
-            <!--<Button fx:id="toImaginaryNumbers" text="Imaginarios" onAction="#switchToMullerIm" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER" />-->
-            <!-- Botón calcular -->
-            <!-- <Button fx:id="calculateButton" text="Calcular" onAction="#calculateMuller" GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" alignment="CENTER" /> -->
-        </GridPane>
-        <!-- Tabla dinámica fuera del GridPane -->
-        <TableView fx:id="resultsTable" prefHeight="400" prefWidth="800">
+                <HBox spacing="15.0" alignment="CENTER" style="-fx-padding: 10px 0 0 0;">
+                    <children>
+                        <Button text="Calcular" onAction="#calculateMuller" styleClass="primary-button" prefWidth="120.0" />
+                        <Button text="Limpiar" onAction="#clearData" styleClass="clear-button" prefWidth="120.0" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        
+        <TableView fx:id="dataTable" prefHeight="250.0" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="iterationColumn" text="Iteración" prefWidth="100" />
-                <TableColumn fx:id="aColumn" text="a" prefWidth="100" />
-                <TableColumn fx:id="bColumn" text="b" prefWidth="100" />
-                <TableColumn fx:id="cColumn" text="c" prefWidth="100" />
-                <TableColumn fx:id="faColumn" text="f(a)" prefWidth="100" />
-                <TableColumn fx:id="fbColumn" text="f(b)" prefWidth="100" />
-                <TableColumn fx:id="fcColumn" text="f(c)" prefWidth="100" />
-                <TableColumn fx:id="aproxColumn" text="Aproximación" prefWidth="140" />
-                <TableColumn fx:id="errorColumn" text="Error" prefWidth="140" />
+                <TableColumn fx:id="iterCol" text="Iteración" prefWidth="70.0"/>
+                <TableColumn fx:id="aCol" text="a (x0)" prefWidth="100.0"/>
+                <TableColumn fx:id="bCol" text="b (x1)" prefWidth="100.0"/>
+                <TableColumn fx:id="cCol" text="c (x2)" prefWidth="100.0"/>
+                <TableColumn fx:id="faCol" text="f(a)" prefWidth="100.0"/>
+                <TableColumn fx:id="fbCol" text="f(b)" prefWidth="100.0"/>
+                <TableColumn fx:id="fcCol" text="f(c)" prefWidth="100.0"/>
+                <TableColumn fx:id="approxCol" text="Aproximación" prefWidth="160.0"/>
+                <TableColumn fx:id="errorCol" text="Error" prefWidth="100.0"/>
             </columns>
         </TableView>
         
-        <Button fx:id="secondaryButton" text="Volver" onAction="#switchToMenu" />
-
+        <Button text="Volver al Menú" onAction="#switchToMenu" styleClass="back-button"/>
     </children>
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
-
-
-    
 </VBox>

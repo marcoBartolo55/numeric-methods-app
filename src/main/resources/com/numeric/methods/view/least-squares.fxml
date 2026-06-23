@@ -8,9 +8,9 @@
 <?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.chart.NumberAxis?>
 
-<VBox alignment="CENTER" spacing="20.0" styleClass="main-container" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.leastSquaresController">
+<VBox alignment="CENTER" spacing="20.0" styleClass="main-container" stylesheets="@../styles/least-squares.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.numeric.methods.controllers.leastSquaresController">
     <children>
-        <Label text="Aproximación por Mínimos Cuadrados" styleClass="title-label" />
+        <Label text="Aproximación por Mínimos Cuadrados" styleClass="title-label"/>
         
         <HBox spacing="30.0" alignment="CENTER" VBox.vgrow="ALWAYS">
             <children>
@@ -18,53 +18,52 @@
                     <children>
                         <GridPane hgap="10" vgap="12" alignment="CENTER">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0"/>
                             </columnConstraints>
                             <children>
-                                <Label text="Número de Puntos:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="body-label" />
-                                <TextField fx:id="pointsField" promptText="Ej: 5" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="custom-text-field" />
-
-                                <Label text="Tipo de Ajuste:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="body-label" />
+                                <Label text="Número de Puntos:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="body-label"/>
+                                <TextField fx:id="pointsField" promptText="Ej: 5" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="custom-text-field"/>
+                                
+                                <Label text="Tipo de Ajuste:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="body-label"/>
                                 <ComboBox fx:id="typeComboBox" promptText="Selecciona..." GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="custom-combo-box">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Lineal" />
-                                            <String fx:value="Cuadrático" />
-                                            <String fx:value="Cúbico" />
-                                            <String fx:value="4to Grado" />
-                                            <String fx:value="5to Grado" />
-                                            <String fx:value="6to Grado" />
+                                            <String fx:value="Lineal"/>
+                                            <String fx:value="Cuadrático"/>
+                                            <String fx:value="Cúbico"/>
+                                            <String fx:value="4to Grado"/>
+                                            <String fx:value="5to Grado"/>
+                                            <String fx:value="6to Grado"/>
                                         </FXCollections>
                                     </items>
                                 </ComboBox>
                             </children>
                         </GridPane>
                         
-                        <TitledPane text="Generar Puntos mediante Función" expanded="false" styleClass="custom-titled-pane">
+                        <TitledPane text="Generar Puntos mediante Función" expanded="true" styleClass="custom-titled-pane">
                             <content>
                                 <VBox spacing="10.0">
                                     <children>
-                                        <Label text="Función f(x):" styleClass="body-label" />
-                                        <TextField fx:id="functionField" promptText="Ej: x^2 - 3*x + 2" styleClass="custom-text-field" />
+                                        <Label text="Función f(x):" styleClass="body-label"/>
+                                        <TextField fx:id="functionField" promptText="Ej: x^2 - 3*x + 2" styleClass="custom-text-field"/>
                                         
                                         <HBox spacing="10.0">
                                             <children>
                                                 <VBox HBox.hgrow="ALWAYS" spacing="5.0">
                                                     <children>
-                                                        <Label text="X Min:" styleClass="body-label" />
-                                                        <TextField fx:id="xMinField" promptText="0" styleClass="custom-text-field" />
+                                                        <Label text="X Min:" styleClass="body-label"/>
+                                                        <TextField fx:id="xMinField" promptText="0" styleClass="custom-text-field"/>
                                                     </children>
                                                 </VBox>
                                                 <VBox HBox.hgrow="ALWAYS" spacing="5.0">
                                                     <children>
-                                                        <Label text="X Max:" styleClass="body-label" />
-                                                        <TextField fx:id="xMaxField" promptText="10" styleClass="custom-text-field" />
+                                                        <Label text="X Max:" styleClass="body-label"/>
+                                                        <TextField fx:id="xMaxField" promptText="10" styleClass="custom-text-field"/>
                                                     </children>
                                                 </VBox>
                                             </children>
                                         </HBox>
-                                        <!--<Button text="Evaluar f(x) en Tabla" onAction="#generatePointsFromFunction" maxWidth="Infinity" styleClass="action-button" />-->
                                     </children>
                                 </VBox>
                             </content>
@@ -72,29 +71,28 @@
                         
                         <HBox spacing="10.0" alignment="CENTER">
                             <children>
-                                <!--<Button text="Generar Tabla" onAction="#generatePoints" styleClass="action-button" />
-                                <Button text="Calcular" onAction="#calculateRegression" styleClass="primary-button" />
-                                <Button text="Limpiar" onAction="#clearData" styleClass="clear-button" />-->
+                                <Button text="Calcular" onAction="#calculateRegression" styleClass="primary-button" prefWidth="120.0" />
+                                <Button text="Limpiar" onAction="#clearData" styleClass="clear-button" prefWidth="120.0" />
                             </children>
                         </HBox>
                         
                         <Separator prefWidth="200.0" styleClass="custom-separator"/>
+                        <Label text="Coeficientes Resultantes" styleClass="section-label"/>
                         
-                        <Label text="Coeficientes Resultantes" styleClass="section-label" />
                         <GridPane hgap="10" vgap="10" alignment="CENTER">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="40.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="40.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0"/>
                             </columnConstraints>
                             <children>
-                                <Label text="a =" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="math-label" />
-                                <TextField fx:id="coefficientAField" editable="false" styleClass="output-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Label text="a =" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="math-label"/>
+                                <TextField fx:id="coefficientAField" editable="false" styleClass="output-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                                 
-                                <Label text="b =" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="math-label" />
-                                <TextField fx:id="coefficientBField" editable="false" styleClass="output-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label text="b =" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="math-label"/>
+                                <TextField fx:id="coefficientBField" editable="false" styleClass="output-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                                 
-                                <Label text="c =" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="math-label" />
-                                <TextField fx:id="coefficientCField" editable="false" styleClass="output-text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Label text="c =" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="math-label"/>
+                                <TextField fx:id="coefficientCField" editable="false" styleClass="output-text-field" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                             </children>
                         </GridPane>
                     </children>
@@ -104,18 +102,18 @@
                     <children>
                         <TableView fx:id="dataTable" prefHeight="250.0" prefWidth="450.0">
                             <columns>
-                                <TableColumn fx:id="pointNumberCol" text="Punto (i)" prefWidth="80.0" />
-                                <TableColumn fx:id="xColumn" text="Coordenada X_i" prefWidth="180.0" />
-                                <TableColumn fx:id="yColumn" text="Coordenada Y_i" prefWidth="180.0" />
+                                <TableColumn fx:id="pointNumberCol" text="Punto (i)" prefWidth="80.0"/>
+                                <TableColumn fx:id="xColumn" text="Coordenada X_i" prefWidth="180.0"/>
+                                <TableColumn fx:id="yColumn" text="Coordenada Y_i" prefWidth="180.0"/>
                             </columns>
                         </TableView>
                         
                         <ScatterChart fx:id="leastSquaresChart" title="Visualización de Puntos" prefHeight="300.0" prefWidth="450.0">
                             <xAxis>
-                                <NumberAxis side="BOTTOM" fx:id="xAxis" label="Eje X" />
+                                <NumberAxis side="BOTTOM" fx:id="xAxis" label="Eje X"/>
                             </xAxis>
                             <yAxis>
-                                <NumberAxis side="LEFT" fx:id="yAxis" label="Eje Y" />
+                                <NumberAxis side="LEFT" fx:id="yAxis" label="Eje Y"/>
                             </yAxis>
                         </ScatterChart>
                     </children>
@@ -123,9 +121,9 @@
             </children>
         </HBox>
         
-        <Button fx:id="secondaryButton" text="Volver al Menú" onAction="#switchToMenu" styleClass="back-button" />
+        <Button fx:id="secondaryButton" text="Volver al Menú" onAction="#switchToMenu" styleClass="back-button"/>
     </children>
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 </VBox>
